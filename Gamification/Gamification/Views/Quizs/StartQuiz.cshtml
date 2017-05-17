@@ -1,0 +1,36 @@
+﻿@model Gamification.Models.QuizViewModel
+
+@{
+    ViewBag.Title = "StartQuiz";
+}
+
+<h2>StartQuiz</h2>
+
+<div>
+    <h4>Quiz</h4>
+  
+   
+    @using (Html.BeginForm())
+    {
+
+       @Html.DisplayFor(model=>Model.Name)
+        
+        <br />
+
+       @Html.DisplayFor(model=> Model.Question)
+        <br />
+
+        foreach(var item in Model.Answers)
+        {
+            @Html.RadioButtonFor(model=>Model.AnswerId, item.Id) @Html.DisplayFor(model=>item.Text)
+            
+            <br />
+
+        }
+
+        
+
+
+         <input type="submit" value="pošalji"  />
+    }
+</div>

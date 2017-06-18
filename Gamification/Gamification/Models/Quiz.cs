@@ -14,7 +14,9 @@ namespace Gamification.Models
 
         public string UserId { get; set; }
 
-      
+        public int QuizLevel { get; set; }
+
+
         public virtual ICollection<Question> Questions { get; set; }
     }
 }

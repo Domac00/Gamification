@@ -49,11 +49,13 @@ namespace Gamification.Controllers
                 _userManager = value;
             }
         }
-
+        private Context db = new Context();
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+            ViewBag.xp = db.UserQuizData.Find(User.Identity.GetUserId()).xp;
+            ViewBag.NumberOfSolvedQuizes = db.UserQuizData.Find(User.Identity.GetUserId()).NumberOfSolvedQuizes;
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."

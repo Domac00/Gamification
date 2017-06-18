@@ -11,12 +11,21 @@ namespace Gamification
     {
         public Context(): base()
         {
-
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<Context, Gamification.Migrations.Configuration>("DefaultConnection"));
+            Database.SetInitializer<Context>(new CreateDatabaseIfNotExists<Context>());
         }
 
         public DbSet<Quiz> Quizes { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<UserQuizData> UserQuizData { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Achievement> Achievement { get; set; }
 
-        public System.Data.Entity.DbSet<Gamification.Models.Answer> Answers { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserQuizData>().HasMany(u => u.Achievement).WithMany(a => a.UserQuizData);
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

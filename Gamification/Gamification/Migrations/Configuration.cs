@@ -9,7 +9,7 @@ namespace Gamification.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Gamification.Context context)

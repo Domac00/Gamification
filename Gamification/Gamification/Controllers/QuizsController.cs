@@ -8,16 +8,21 @@ using System.Web;
 using System.Web.Mvc;
 using Gamification;
 using Gamification.Models;
+using Microsoft.AspNet.Identity;
+using System.Data.Entity.Migrations;
 
 namespace Gamification.Controllers
 {
     public class QuizsController : Controller
     {
         private Context db = new Context();
+        
 
         // GET: Quizs
         public ActionResult Index()
         {
+            var xp = db.UserQuizData.Find(User.Identity.GetUserId()).xp;
+            ViewBag.xp = xp.ToString();
             return View(db.Quizes.ToList());
         }
 
@@ -47,8 +52,10 @@ namespace Gamification.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Quiz quiz)
+        public ActionResult Create( Quiz quiz)
         {
+            var userId = User.Identity.GetUserId();
+            quiz.UserId = userId;
             if (ModelState.IsValid)
             {
                 db.Quizes.Add(quiz);
@@ -160,9 +167,10 @@ namespace Gamification.Controllers
                 Session["UserScore"] = UserScore;
             }
 
+            //Iduce pitanje
             Question question = db.Questions.Find(answer.QuestionId+1);
             
-            if (question != null)
+            if (question != null && question.QuizId==UserScore.QuizId)
             {
                 
                 vm.Question = question.Text;
@@ -170,7 +178,18 @@ namespace Gamification.Controllers
                 vm.QuestionId = question.Id;
             }else
             {
-                
+                //dodavanje xp-a i broj rijesenih kvizova
+                UserQuizData uqd = db.UserQuizData.Find(User.Identity.GetUserId());
+                Quiz quiz = db.Quizes.Find(UserScore.QuizId);
+                var QuizLevel = quiz.QuizLevel;
+
+                uqd.xp = uqd.xp + QuizLevel;
+                uqd.NumberOfSolvedQuizes++;
+
+                //Spremanje u bazu
+                db.UserQuizData.AddOrUpdate(uqd);
+                db.SaveChanges();
+
                 return RedirectToAction("Score",UserScore);
             }
 
@@ -181,7 +200,15 @@ namespace Gamification.Controllers
         public ActionResult Score(UserScore us)
         {
             ViewBag.NumberOfQuestions = db.Quizes.Find(us.QuizId).Questions.Count;
+            
             return View(us);
+        }
+
+        // high score
+        public ActionResult HighScore()
+        {
+            
+            return View(db.UserQuizData.OrderBy(o=>o.xp).ToList());
         }
     }
 

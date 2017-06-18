@@ -70,3 +70,6 @@ c:\users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\o
 c:\users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.csproj.GenerateResource.Cache
 c:\users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.questionidnedostaje.resources
 C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.csprojResolveAssemblyReference.cache
+C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.UserQuizData.resources
+C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.DodavanjeQuizLeveluQuizklasu.resources
+C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.DodavanjeAchievementmodela.resources

@@ -13,6 +13,10 @@ namespace Gamification.Models
 
         public int QuizId { get; set; }
 
+        public int QuizLevel { get; set; }
+
+        public int NumberOfQuestions { get; set; }
+
         public int score {  get; set; }
 
        public UserScore() { score = 0; }

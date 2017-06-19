@@ -11,6 +11,8 @@ namespace Gamification.Models
         [Key]
         public string UserId { get; set; }
 
+        public string UserName { get; set; }
+
         public int xp { get; set; }
 
         public int NumberOfSolvedQuizes { get; set; }

@@ -1,10 +1,21 @@
 ﻿@model Gamification.Models.UserScore
 @{
     ViewBag.Title = "Score";
+    string message = ViewBag.Message;
 }
+<script>
+    alert('@message')
+           
 
+            
+
+</script>
 <h2>Score</h2>
 <h2>Ostvareni bodovi:</h2>
 @Html.DisplayFor(model=>Model.score) / @ViewBag.NumberOfQuestions <p>tocna odgovora!</p>
 <br />
+
+
+
+
 @Html.ActionLink("Popis kvizova","Index","Quizs")

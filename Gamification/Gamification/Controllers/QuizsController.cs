@@ -21,8 +21,9 @@ namespace Gamification.Controllers
         // GET: Quizs
         public ActionResult Index()
         {
+
             var xp = db.UserQuizData.Find(User.Identity.GetUserId()).xp;
-            ViewBag.xp = xp.ToString();
+            ViewBag.xp = xp;
             return View(db.Quizes.ToList());
         }
 
@@ -181,10 +182,15 @@ namespace Gamification.Controllers
                 //dodavanje xp-a i broj rijesenih kvizova
                 UserQuizData uqd = db.UserQuizData.Find(User.Identity.GetUserId());
                 Quiz quiz = db.Quizes.Find(UserScore.QuizId);
+                var UserId = User.Identity.GetUserId();
                 var QuizLevel = quiz.QuizLevel;
+                UserScore.QuizLevel = QuizLevel;
+                UserScore.NumberOfQuestions = quiz.Questions.Count;
 
                 uqd.xp = uqd.xp + QuizLevel;
                 uqd.NumberOfSolvedQuizes++;
+
+            
 
                 //Spremanje u bazu
                 db.UserQuizData.AddOrUpdate(uqd);
@@ -197,10 +203,30 @@ namespace Gamification.Controllers
         }
 
         //Prikaz rezultata
-        public ActionResult Score(UserScore us)
+        public ActionResult Score(UserScore us )
         {
-            ViewBag.NumberOfQuestions = db.Quizes.Find(us.QuizId).Questions.Count;
+            UserQuizData uqd = db.UserQuizData.Find(User.Identity.GetUserId());
+            Achievement achievement = new Achievement();
+           
             
+            var UserId = User.Identity.GetUserId();
+            
+            ViewBag.NumberOfQuestions = db.Quizes.Find(us.QuizId).Questions.Count;
+
+            //Provjera achievementa
+            var aId = achievement.CheckAchievement(uqd,us);        //id ostvarenog trofeja
+            while (aId != 0)
+            {
+                
+                //za prijavljenog korisnika dodaj trofej pomocu Id-a trofeja
+                db.UserQuizData.Include("Achievement").FirstOrDefault(u => u.UserId == UserId).Achievement.Add(db.Achievement.Find(aId));
+                var msg = db.Achievement.Find(aId).Description.ToString();
+                db.UserQuizData.AddOrUpdate(uqd);
+                db.SaveChanges();
+                ViewBag.message = msg;
+                 aId = achievement.CheckAchievement(uqd, us);
+            }
+
             return View(us);
         }
 
@@ -208,7 +234,7 @@ namespace Gamification.Controllers
         public ActionResult HighScore()
         {
             
-            return View(db.UserQuizData.OrderBy(o=>o.xp).ToList());
+            return View(db.UserQuizData.OrderByDescending(o => o.xp).ToList());
         }
     }
 

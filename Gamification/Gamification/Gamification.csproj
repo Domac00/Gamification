@@ -198,6 +198,18 @@
     <Compile Include="Migrations\201706151303506_Dodavanje Achievement modela.Designer.cs">
       <DependentUpon>201706151303506_Dodavanje Achievement modela.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706181910477_Update modela.cs" />
+    <Compile Include="Migrations\201706181910477_Update modela.Designer.cs">
+      <DependentUpon>201706181910477_Update modela.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706191534313_Adding many to many.cs" />
+    <Compile Include="Migrations\201706191534313_Adding many to many.Designer.cs">
+      <DependentUpon>201706191534313_Adding many to many.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706191630278_Dodavanje UserName u UserQuizData.cs" />
+    <Compile Include="Migrations\201706191630278_Dodavanje UserName u UserQuizData.Designer.cs">
+      <DependentUpon>201706191630278_Dodavanje UserName u UserQuizData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Achievement.cs" />
@@ -317,6 +329,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706151303506_Dodavanje Achievement modela.resx">
       <DependentUpon>201706151303506_Dodavanje Achievement modela.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706181910477_Update modela.resx">
+      <DependentUpon>201706181910477_Update modela.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706191534313_Adding many to many.resx">
+      <DependentUpon>201706191534313_Adding many to many.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706191630278_Dodavanje UserName u UserQuizData.resx">
+      <DependentUpon>201706191630278_Dodavanje UserName u UserQuizData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

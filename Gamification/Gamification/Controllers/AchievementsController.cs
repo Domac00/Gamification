@@ -52,7 +52,6 @@ namespace Gamification.Controllers
         {
             if (ModelState.IsValid)
             {
-                achievement.UserId = User.Identity.GetUserId();
                 db.Achievement.Add(achievement);
                 
                 db.SaveChanges();

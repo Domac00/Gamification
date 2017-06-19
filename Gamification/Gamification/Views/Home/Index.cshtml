@@ -2,4 +2,16 @@
     ViewBag.Title = "Home Page";
 }
 
-@Html.ActionLink("Popis Kvizova","Index","Quizs")
+<div class="container">
+    <h2>Pospješivanje E-učenja pomču igrifikacije</h2> <br />
+</div>
+
+@{ 
+    if (User.Identity.IsAuthenticated)
+    {
+       <h3> Klikni na popis kvizova za početak!</h3>
+    }else
+    {
+        <h3> Prijavi se ili registriraj</h3>
+    }
+}

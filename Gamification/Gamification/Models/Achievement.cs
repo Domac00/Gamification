@@ -13,14 +13,18 @@ namespace Gamification.Models
 
         public string Description { get; set; }
 
-        public string UserId { get; set; }
-
-        public int CheckAchievement(UserQuizData uqd)
+        public int CheckAchievement(UserQuizData uqd, UserScore us)
         {
             //Prvi kviz odigran
-            if (uqd.NumberOfSolvedQuizes == 1) { return 1; }
+            if (uqd.NumberOfSolvedQuizes == 1 && !uqd.Achievement.Any(a => a.Id == 6)) { return 6; }
             //5 rjesenih kvizova
-            else if (uqd.NumberOfSolvedQuizes == 5) { return 2; }
+            else if (uqd.NumberOfSolvedQuizes == 5 && !uqd.Achievement.Any(a=>a.Id==7)) { return 7; }
+            //10 kvizova
+            else if (uqd.NumberOfSolvedQuizes == 10 && !uqd.Achievement.Any(a => a.Id == 8)) { return 8; }
+            //30 Kvizova
+            else if (uqd.NumberOfSolvedQuizes == 30 && !uqd.Achievement.Any(a => a.Id == 9)) { return 9; }
+            //level 2 100%
+            else if ( us.QuizLevel==2 && us.NumberOfQuestions/us.score == 1 && !uqd.Achievement.Any(a => a.Id == 10)) { return 10; }
             else return 0;
         }
 

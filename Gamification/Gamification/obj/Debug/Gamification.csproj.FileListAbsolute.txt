@@ -73,6 +73,9 @@ C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\o
 C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.DodavanjeQuizLeveluQuizklasu.resources
 C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.DodavanjeAchievementmodela.resources
 C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.Updatemodela.resources
-C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.csprojResolveAssemblyReference.cache
 C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.Addingmanytomany.resources
 C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.DodavanjeUserNameuUserQuizData.resources
+C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.PovezivanjeQuiziUserQuizData.resources
+C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.Dodavanjeocjenekviza.resources
+C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.Promjenanazivaatributaumodelu.resources
+C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.csprojResolveAssemblyReference.cache

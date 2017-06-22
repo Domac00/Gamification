@@ -4,26 +4,28 @@
     ViewBag.Title = "StartQuiz";
 }
 
-<h2>StartQuiz</h2>
+
 
 <div>
-    <h4>Quiz</h4>
+    
   
    
     @using (Html.BeginForm())
     {
 
-       @Html.DisplayFor(model=>Model.Name)
+      <h3>@Html.DisplayFor(model => Model.Name)</h3>
         
         <br />
 
-       @Html.DisplayFor(model=> Model.Question)
+        <h4>@Html.DisplayFor(model => Model.Question) </h4>
         <br />
 
-        foreach(var item in Model.Answers)
+
+        foreach (var item in Model.Answers)
         {
-            @Html.RadioButtonFor(model=>Model.AnswerId, item.Id) @Html.DisplayFor(model=>item.Text)
-            
+            <div class="radio-btn">
+                @Html.RadioButtonFor(model => Model.AnswerId, item.Id) @Html.DisplayFor(model => item.Text) <br />
+            </div>
             <br />
 
         }

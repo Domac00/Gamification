@@ -25,6 +25,10 @@ namespace Gamification
         {
             modelBuilder.Entity<UserQuizData>().HasMany(u => u.Achievement).WithMany(a => a.UserQuizData);
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<UserQuizData>().HasMany(u => u.Quiz).WithMany(a => a.UserQuizData);
+            base.OnModelCreating(modelBuilder);
+
         }
 
     }

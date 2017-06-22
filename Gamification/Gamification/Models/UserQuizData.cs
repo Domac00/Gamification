@@ -19,6 +19,8 @@ namespace Gamification.Models
 
         public virtual ICollection<Achievement> Achievement { get; set; }
 
+        public virtual ICollection<Quiz> Quiz { get; set; }
+
 
     }
 }

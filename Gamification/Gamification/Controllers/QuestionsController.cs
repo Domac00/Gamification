@@ -16,9 +16,10 @@ namespace Gamification.Controllers
         private Context db = new Context();
 
         // GET: Questions
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
             var questions = db.Questions.Include(q => q.Quiz);
+            ViewBag.QuizId = id;
             return View(questions.ToList());
         }
 
@@ -38,9 +39,11 @@ namespace Gamification.Controllers
         }
 
         // GET: Questions/Create
-        public ActionResult Create()
+
+        public ActionResult Create(int id)
         {
-            ViewBag.QuizId = new SelectList(db.Quizes, "Id", "Name");
+            // ViewBag.QuizId = new SelectList(db.Quizes, "Id", "Name");
+            ViewBag.QuizId = id;
             return View();
         }
 
@@ -48,14 +51,16 @@ namespace Gamification.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Text,QuizId")] Question question)
+        [ValidateInput(false)]
+        public ActionResult Create( Question question, int QuizId)
         {
+            question.QuizId = QuizId;
             if (ModelState.IsValid)
             {
+
                 db.Questions.Add(question);
                 db.SaveChanges();
-                return RedirectToAction("Create");
+                return RedirectToAction("Create",new { id = QuizId});
             }
 
             ViewBag.QuizId = new SelectList(db.Quizes, "Id", "Name", question.QuizId);

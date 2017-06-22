@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<Gamification.Models.Question>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pitanja";
 }
 
-<h2>Index</h2>
+<h2>Pitanja</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         <th>
@@ -20,7 +20,9 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Where(q=>q.QuizId == ViewBag.QuizId)){
+    if (!item.Answers.Any())
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Quiz.Name)
@@ -29,12 +31,13 @@
             @Html.DisplayFor(modelItem => item.Text)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id }) |
-            @Html.ActionLink("Dodaj odgovore", "Create","Answers",new { id = item.Id},null)
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |*@
+            @Html.ActionLink("Dodaj odgovore", "Create", "Answers", new { id = item.Id }, null)
         </td>
     </tr>
+    }
 }
 
 </table>

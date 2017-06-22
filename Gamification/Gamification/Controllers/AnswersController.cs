@@ -41,6 +41,7 @@ namespace Gamification.Controllers
         public ActionResult Create(int id)
         {
             // ViewBag.QuestionId = new SelectList(db.Questions, "Id", "Text");
+            ViewBag.QuizId = db.Questions.FirstOrDefault(q => q.Id == id).QuizId;
             ViewBag.QuestionId = id;
             return View();
         }
@@ -49,7 +50,7 @@ namespace Gamification.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create( Answer answer, int QuestionId)
         {
             if (ModelState.IsValid)

@@ -24,6 +24,7 @@ namespace Gamification.Controllers
 
             var xp = db.UserQuizData.Find(User.Identity.GetUserId()).xp;
             ViewBag.xp = xp;
+            ViewBag.UserId = User.Identity.GetUserId();
             return View(db.Quizes.ToList());
         }
 
@@ -43,25 +44,27 @@ namespace Gamification.Controllers
         }
 
         // GET: Quizs/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Quizs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create( Quiz quiz)
         {
             var userId = User.Identity.GetUserId();
             quiz.UserId = userId;
+            quiz.SumOfGrades = 0;
+            quiz.Rating = 0;
+            quiz.NumberOfRatings = 0;
             if (ModelState.IsValid)
-            {
+            {   //Dodavanje kviza u bazu
                 db.Quizes.Add(quiz);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "Questions", new { id = quiz.Id });
             }
 
             return View(quiz);
@@ -207,11 +210,16 @@ namespace Gamification.Controllers
         {
             UserQuizData uqd = db.UserQuizData.Find(User.Identity.GetUserId());
             Achievement achievement = new Achievement();
-           
-            
             var UserId = User.Identity.GetUserId();
-            
-            ViewBag.NumberOfQuestions = db.Quizes.Find(us.QuizId).Questions.Count;
+            var NumberOfQuestions = db.Quizes.Find(us.QuizId).Questions.Count;
+
+            ViewBag.NumberOfQuestions = NumberOfQuestions;
+            us.Percentage = (us.score / NumberOfQuestions) * 100;
+
+            //označavanje kviz akao riješenog
+            db.UserQuizData.Include("Quiz").FirstOrDefault(u => u.UserId == UserId).Quiz.Add(db.Quizes.Find(us.QuizId));
+            db.UserQuizData.AddOrUpdate(uqd);
+            db.SaveChanges();
 
             //Provjera achievementa
             var aId = achievement.CheckAchievement(uqd,us);        //id ostvarenog trofeja
@@ -228,6 +236,26 @@ namespace Gamification.Controllers
             }
 
             return View(us);
+        }
+
+        //Post Score
+        [HttpPost]
+        [ActionName("Score")]
+        public ActionResult ScorePost(UserScore user)
+        {
+            // izračun ocjene kviza
+            var quiz = db.Quizes.Find(user.QuizId);
+            var suma = quiz.SumOfGrades;
+            var NumberOfRatings = quiz.NumberOfRatings + 1;
+            suma = suma + user.Rate;
+
+            quiz.SumOfGrades = suma;
+            quiz.NumberOfRatings = NumberOfRatings;
+            quiz.Rating = suma / NumberOfRatings;
+
+            db.Quizes.AddOrUpdate(quiz);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // high score

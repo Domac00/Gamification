@@ -56,6 +56,7 @@ namespace Gamification.Controllers
         {
             ViewBag.xp = db.UserQuizData.Find(User.Identity.GetUserId()).xp;
             ViewBag.NumberOfSolvedQuizes = db.UserQuizData.Find(User.Identity.GetUserId()).NumberOfSolvedQuizes;
+            ViewBag.UserId = User.Identity.GetUserId();
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -72,7 +73,9 @@ namespace Gamification.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Achievements = db.UserQuizData.FirstOrDefault(u=>u.UserId == userId).Achievement.ToList()
+                
             };
             return View(model);
         }

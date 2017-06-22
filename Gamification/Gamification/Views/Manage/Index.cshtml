@@ -3,39 +3,84 @@
     ViewBag.Title = "Manage";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>Profil</h2>
+
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Change your account settings</h4>
+    <h4></h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>XP:</dt>
+        <dt><h4>XP:</h4></dt>
         <dd>
-            [
-            @ViewBag.xp
-            ]
+            
+            <h4> @ViewBag.xp</h4>
+            
         </dd>
-        <dt>Broj riješenih kvizova:</dt>
+        <dt><h4>Broj riješenih kvizova:</h4></dt>
         <dd>
-            [
-            @ViewBag.NumberOfSolvedQuizes
-            ]
+            
+            <h4> @ViewBag.NumberOfSolvedQuizes</h4>
+            
         </dd>
-        <dt>Password:</dt>
-        <dd>
-            [
+        @*<dt>Password:</dt>
+        <dd>*@
+            @*[
             @if (Model.HasPassword)
             {
-                @Html.ActionLink("Change your password", "ChangePassword")
+                @Html.ActionLink("Promjeni Lozinku", "ChangePassword")
             }
             else
             {
                 @Html.ActionLink("Create", "SetPassword")
             }
-            ]
-        </dd>
-        
+            ]*@
+        @*</dd>*@
+
+      
       
     </dl>
 </div>
+<br />
+
+<h4>Ostvareni trofeji:</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            <h4>Naziv trofeja</h4>
+        </th>
+        <th>
+            <h4>Opis</h4>
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Achievements)
+    {
+       
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+               
+            </tr>
+       
+           
+        
+
+    }
+
+
+</table>
+<br />
+
+@{
+    if (User.Identity.Name == "Dominik@g.com")
+    {
+        @Html.ActionLink("Napravi kviz", "Create", "Quizs")
+    }
+}
+

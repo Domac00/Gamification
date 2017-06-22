@@ -24,7 +24,7 @@ namespace Gamification.Models
             //30 Kvizova
             else if (uqd.NumberOfSolvedQuizes == 30 && !uqd.Achievement.Any(a => a.Id == 9)) { return 9; }
             //level 2 100%
-            else if ( us.QuizLevel==2 && us.NumberOfQuestions/us.score == 1 && !uqd.Achievement.Any(a => a.Id == 10)) { return 10; }
+            else if ( us.QuizLevel==2 && us.Percentage==100 && !uqd.Achievement.Any(a => a.Id == 10)) { return 10; }
             else return 0;
         }
 

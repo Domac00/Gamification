@@ -15,10 +15,14 @@ namespace Gamification.Models
 
         public int QuizLevel { get; set; }
 
-        public int NumberOfQuestions { get; set; }
+        public float NumberOfQuestions { get; set; }
 
-        public int score {  get; set; }
+        public float score {  get; set; }
 
-       public UserScore() { score = 0; }
+        public float Percentage { get; set; }
+
+        public float Rate { get; set; }
+
+        public UserScore() { score = 0; }
     }
 }

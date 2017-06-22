@@ -16,6 +16,13 @@ namespace Gamification.Models
 
         public int QuizLevel { get; set; }
 
+        public float SumOfGrades { get; set; }
+
+        public int NumberOfRatings { get; set; }
+
+        public float Rating { get; set; }
+
+        public virtual ICollection<UserQuizData> UserQuizData { get; set; }
 
         public virtual ICollection<Question> Questions { get; set; }
     }

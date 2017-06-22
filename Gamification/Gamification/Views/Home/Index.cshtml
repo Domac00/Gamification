@@ -3,15 +3,15 @@
 }
 
 <div class="container">
-    <h2>Pospješivanje E-učenja pomču igrifikacije</h2> <br />
+    <h3>Uči o web tehnologijama, riješavaj kvizove i potvrdi svoje znanje.</h3> <br />
 </div>
 
 @{ 
     if (User.Identity.IsAuthenticated)
     {
-       <h3> Klikni na popis kvizova za početak!</h3>
+       <h4>Riješavaj kvizove, osvajaj trofeje i budi prvi na HighScore-u. Na profilu vidi svoje detalje.</h4>
     }else
     {
-        <h3> Prijavi se ili registriraj</h3>
+        <h4> Prijavi se ili registriraj za početak</h4>
     }
 }

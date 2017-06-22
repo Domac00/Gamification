@@ -167,7 +167,10 @@ namespace Gamification.Controllers
                     uqd.NumberOfSolvedQuizes = 0;
                     uqd.xp = 0;
                     uqd.UserId = user.Id;
-                    uqd.UserName = user.UserName;
+                    var UserName = user.UserName;
+                    var i =UserName.IndexOf('@');
+                    UserName = UserName.Remove(i);
+                    uqd.UserName = UserName;
                     db.UserQuizData.Add(uqd);
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");

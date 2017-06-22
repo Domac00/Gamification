@@ -190,7 +190,7 @@ namespace Gamification.Controllers
                 UserScore.QuizLevel = QuizLevel;
                 UserScore.NumberOfQuestions = quiz.Questions.Count;
 
-                uqd.xp = uqd.xp + QuizLevel;
+                uqd.xp = uqd.xp + QuizLevel + (int)UserScore.score;
                 uqd.NumberOfSolvedQuizes++;
 
             

@@ -26,7 +26,7 @@
     </tr>
 
 @foreach (var item in Model) {
-    if (ViewBag.xp < Model.Where(q=>q.QuizLevel==1).Count() && item.QuizLevel < 2 && !item.UserQuizData.Any(q=>q.UserId == ViewBag.UserId))
+    if ( item.QuizLevel < 2 && !item.UserQuizData.Any(q=>q.UserId == ViewBag.UserId))
     {
     <tr>
         <td>

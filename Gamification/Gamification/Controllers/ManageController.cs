@@ -54,9 +54,22 @@ namespace Gamification.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
-            ViewBag.xp = db.UserQuizData.Find(User.Identity.GetUserId()).xp;
+            // prikaz profila
+            var xp = db.UserQuizData.Find(User.Identity.GetUserId()).xp;
+            ViewBag.xp = xp;
             ViewBag.NumberOfSolvedQuizes = db.UserQuizData.Find(User.Identity.GetUserId()).NumberOfSolvedQuizes;
             ViewBag.UserId = User.Identity.GetUserId();
+            ViewBag.UserLevel = db.UserQuizData.Find(User.Identity.GetUserId()).UserLevel;
+
+            if (ViewBag.UserLevel == 1) { ViewBag.NextLevel = 5;   }
+            else if (ViewBag.UserLevel == 2) { ViewBag.NextLevel = 30; }
+            else if (ViewBag.UserLevel == 3) { ViewBag.NextLevel = 50; }
+            else if (ViewBag.UserLevel == 4) { ViewBag.NextLevel = 100; }
+            
+          
+
+
+
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."

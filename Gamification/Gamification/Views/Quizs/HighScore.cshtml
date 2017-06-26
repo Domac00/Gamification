@@ -12,6 +12,9 @@
                 @Html.DisplayNameFor(model => model.UserName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.UserLevel)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model=>model.xp)
             </th>
         </tr>
@@ -23,7 +26,13 @@
                     @Html.DisplayFor(modelItem => item.UserName)
                 </td>
                 <td>
-                @Html.DisplayFor(modelItem => item.xp)
+                @Html.DisplayFor(modelItem => item.UserLevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(model=>item.xp)
+                </td>
+                <td>
+                     @Html.ActionLink("Pogledaj profil", "ShowProfile", new { id = item.UserId})
                 </td>
             </tr>
         }

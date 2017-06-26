@@ -3,7 +3,7 @@
     ViewBag.Title = "Manage";
 }
 
-<h2>Profil</h2>
+<h2>@User.Identity.Name.Remove(User.Identity.Name.IndexOf("@"))</h2>
 
 
 <p class="text-success">@ViewBag.StatusMessage</p>
@@ -11,10 +11,16 @@
     <h4></h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt><h4>Level:</h4></dt>
+        <dd>
+
+            <h4> @ViewBag.UserLevel </h4>
+
+        </dd>
         <dt><h4>XP:</h4></dt>
         <dd>
             
-            <h4> @ViewBag.xp</h4>
+            <h4> @ViewBag.xp / @ViewBag.NextLevel</h4>
             
         </dd>
         <dt><h4>Broj riješenih kvizova:</h4></dt>

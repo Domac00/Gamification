@@ -192,6 +192,7 @@ namespace Gamification.Controllers
 
                 uqd.xp = uqd.xp + QuizLevel + (int)UserScore.score;
                 uqd.NumberOfSolvedQuizes++;
+                uqd.UserLevel = uqd.checkUserLevel(uqd.xp);
 
             
 
@@ -216,7 +217,7 @@ namespace Gamification.Controllers
             ViewBag.NumberOfQuestions = NumberOfQuestions;
             us.Percentage = (us.score / NumberOfQuestions) * 100;
 
-            //označavanje kviz akao riješenog
+            //označavanje kviza kao riješenog
             db.UserQuizData.Include("Quiz").FirstOrDefault(u => u.UserId == UserId).Quiz.Add(db.Quizes.Find(us.QuizId));
             db.UserQuizData.AddOrUpdate(uqd);
             db.SaveChanges();
@@ -263,6 +264,13 @@ namespace Gamification.Controllers
         {
             
             return View(db.UserQuizData.OrderByDescending(o => o.xp).ToList());
+        }
+
+        //Prikaz profla određenog korisnika
+        public ActionResult ShowProfile(string id)
+        {
+            var profile = db.UserQuizData.Find(id);
+            return View(profile);
         }
     }
 

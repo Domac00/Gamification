@@ -167,6 +167,7 @@ namespace Gamification.Controllers
                     uqd.NumberOfSolvedQuizes = 0;
                     uqd.xp = 0;
                     uqd.UserId = user.Id;
+                    uqd.UserLevel = 1;
                     var UserName = user.UserName;
                     var i =UserName.IndexOf('@');
                     UserName = UserName.Remove(i);

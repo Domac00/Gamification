@@ -222,6 +222,10 @@
     <Compile Include="Migrations\201706212236485_Promjena naziva atributa u modelu.Designer.cs">
       <DependentUpon>201706212236485_Promjena naziva atributa u modelu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706261234406_Dodavanje UserLevel-a.cs" />
+    <Compile Include="Migrations\201706261234406_Dodavanje UserLevel-a.Designer.cs">
+      <DependentUpon>201706261234406_Dodavanje UserLevel-a.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Achievement.cs" />
@@ -317,6 +321,7 @@
     <Content Include="Views\Achievements\Edit.cshtml" />
     <Content Include="Views\Achievements\Index.cshtml" />
     <Content Include="Views\Manage\Achievements.cshtml" />
+    <Content Include="Views\Quizs\ShowProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -362,6 +367,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706212236485_Promjena naziva atributa u modelu.resx">
       <DependentUpon>201706212236485_Promjena naziva atributa u modelu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706261234406_Dodavanje UserLevel-a.resx">
+      <DependentUpon>201706261234406_Dodavanje UserLevel-a.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

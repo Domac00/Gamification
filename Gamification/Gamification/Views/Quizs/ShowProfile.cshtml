@@ -1,0 +1,72 @@
+﻿@model Gamification.Models.UserQuizData
+
+@{
+    ViewBag.Title = "Profil";
+}
+
+<h2>@Html.DisplayFor(model=>model.UserName)</h2>
+
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt><h4>Level:</h4></dt>
+        <dd>
+
+            <h4> @Html.DisplayFor(model=>model.UserLevel) </h4>
+
+        </dd>
+        <dt><h4>XP:</h4></dt>
+        <dd>
+
+            <h4> @Html.DisplayFor(model=>model.xp)</h4>
+
+        </dd>
+        <dt><h4>Broj riješenih kvizova:</h4></dt>
+        <dd>
+
+            <h4> @Html.DisplayFor(model=>model.NumberOfSolvedQuizes)</h4>
+
+        </dd>
+
+
+    </dl>
+</div>
+<br />
+
+<h4>Ostvareni trofeji:</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            <h4>Naziv trofeja</h4>
+        </th>
+        <th>
+            <h4>Opis</h4>
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Achievement)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+
+        </tr>
+
+
+
+
+    }
+
+
+</table>
+<br />
+
+
+

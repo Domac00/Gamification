@@ -79,3 +79,4 @@ C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\o
 C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.Dodavanjeocjenekviza.resources
 C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.Promjenanazivaatributaumodelu.resources
 C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.csprojResolveAssemblyReference.cache
+C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.DodavanjeUserLevela.resources

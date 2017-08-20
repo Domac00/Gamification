@@ -1,0 +1,35 @@
+﻿@model Gamification.Models.UserQuizData
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            <h3>Naziv trofeja</h3>
+        </th>
+        <th>
+          <h3>Opis</h3>
+        </th>
+    </tr>
+    
+    @{ if (Model.Achievement.Any())
+        {
+    foreach (var item in Model.Achievement)
+    {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+              
+            </tr>
+
+
+    }
+            }
+        }
+
+</table>

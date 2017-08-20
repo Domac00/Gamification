@@ -1,0 +1,54 @@
+﻿@model Gamification.Models.Quiz
+
+@{
+    ViewBag.Title = "Točni odgovori";
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            <h3> @Html.DisplayFor(model => model.Name) </h3>
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Questions) {
+    <tr>
+        <td>
+            <h4> @Html.DisplayFor(modelItem => item.Text)  </h4> 
+        @*</td>
+        <td>*@
+            @foreach (int id in ViewBag.UserAnswers)
+            {
+                foreach(var answer in item.Answers)
+                {
+                    if(answer.Id == id && answer.IsTrue)
+                    {
+                        <h4>Vaš odgovor: </h4> @Html.DisplayFor(a=>answer.Text) <br />
+                        <h4 style="color:green"> Točan odgovor!</h4> <br />
+                    }else if(answer.Id == id)
+                    {
+                        <h4>Vaš odgovor: </h4> @Html.DisplayFor(a => answer.Text) <br />
+                        <h4 style="color:red"> Ne točan odgovor!</h4> <br />
+                    }
+                }
+            }
+        </td>
+       
+       
+    </tr>
+}
+
+</table>
+
+@*@{ 
+    foreach(var item in Model.Questions)
+    {
+        foreach(var answer in item.Answers)
+        {
+            @Html.DisplayFor(a=>answer.Text) <br />
+        }
+    }
+}*@

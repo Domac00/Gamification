@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Gamification.Models.UserQuizData>
+
+<link href="~/Content/CustomLinks.css" rel="stylesheet" />
+
+    @{
+        ViewBag.Title = "HighScore";
+    }
+
+    <h4 style="text-align:center">Top korisnici po osvojenom xp-u</h4>
+<br />
+
+    <table class="table">
+        <tr>
+            <th>
+                <h4 style="font-weight:bold">User Name</h4>
+            </th>
+            <th>
+                <h4 style="font-weight:bold">Level </h4>
+            </th>
+            <th>
+                <h4 style="font-weight:bold">XP</h4>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <h4>@Html.DisplayFor(modelItem => item.UserName)</h4>
+                </td>
+                <td>
+                    <h4>@Html.DisplayFor(modelItem => item.UserLevel)</h4>
+                </td>
+                <td>
+                    <h4> @Html.DisplayFor(model => item.xp)</h4>
+                </td>
+                <td>
+                     @Html.ActionLink("Pogledaj profil", "ShowProfile", new { id = item.UserId}, new { @class = "btn-default" })
+                </td>
+            </tr>
+        }
+
+
+    </table>
+

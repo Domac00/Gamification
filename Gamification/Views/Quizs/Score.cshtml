@@ -1,0 +1,87 @@
+﻿@model Gamification.Models.UserScore
+
+<link href="~/Content/CustomLinks.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Score";
+    string aMsg = ViewBag.message;
+    string lMsg = ViewBag.LevelMsg;
+    if (aMsg != null)
+    {
+
+        <script type="text/javascript">
+           alert('@aMsg')
+
+
+        </script>
+
+    }
+
+    if (lMsg != null)
+    {
+
+        <script type="text/javascript">
+           alert('@lMsg')
+
+
+        </script>
+
+    }
+
+}
+
+
+
+
+<h2 style="text-align:center">
+   Vaš rezultat: @Html.DisplayFor(model => Model.score) / @ViewBag.NumberOfQuestions točnih odgovora, odnosno @Html.DisplayFor(model => model.Percentage) %.
+</h2>
+    <br />
+
+@{ 
+    if(Model.Percentage >= 80)
+    {
+        <h2 style="text-align:center">Izvrsno!</h2>
+    }
+    if (Model.Percentage > 50 && Model.Percentage < 80)
+    {
+        <h2 style="text-align:center">Vrlo dobro!</h2>
+    }
+    if (Model.Percentage > 30 && Model.Percentage <= 50)
+    {
+        <h2 style="text-align:center">Može to i bolje!</h2>
+    }
+    if (Model.Percentage < 30 )
+    {
+        <h2 style="text-align:center">Bolje prouči tutoriale!</h2>
+    }
+}
+<br />
+<h2 style="text-align:center"> + @ViewBag.xpToShow xp</h2>
+<br />
+<div style="text-align:center">
+    @Html.ActionLink("Pogledaj svoje odgovore", "ShowAnswers", new { UserAnswers = Json.Encode(Model.UserAnswers), QuizId = Model.QuizId }, new { @class = "btn-default" })
+
+
+</div>
+<br />
+<hr />
+
+
+<h4>Ocijeni kviz</h4>
+@using (Html.BeginForm())
+{
+    <div class="radio">
+        @Html.RadioButtonFor(model => Model.Rate, 1) <p>1</p>
+        @Html.RadioButtonFor(model => Model.Rate, 2)<p>2</p>
+        @Html.RadioButtonFor(model => Model.Rate, 3)<p>3</p>
+        @Html.RadioButtonFor(model => Model.Rate, 4)<p>4</p>
+        @Html.RadioButtonFor(model => Model.Rate, 5)<p>5</p>
+    </div>
+<input type="submit" value="Ocijeni" class="btn btn-secondary" />
+}
+
+
+<br />
+    @*@Html.ActionLink("Popis kvizova", "Index", "Quizs")*@
+

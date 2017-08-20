@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+@{ 
+    if (User.Identity.IsAuthenticated)
+    {
+       <h3 style="text-align:center">Nauči sve o web tehnologijama, te provjeri svoje znanje u kvizu. </h3>
+    }else
+    {
+        <h4> Prijavi se ili registriraj za početak</h4>
+    }
+}

@@ -1,0 +1,106 @@
+﻿@model Gamification.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>@User.Identity.Name</h2>
+
+
+@*<p class="text-success">@ViewBag.StatusMessage</p>*@
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt><h4>Level:</h4></dt>
+        <dd>
+
+            <h4> @ViewBag.UserLevel </h4>
+
+        </dd>
+        <dt><h4>XP:</h4></dt>
+        <dd>
+            
+            <h4> @ViewBag.xp / @ViewBag.NextLevel</h4>
+            
+        </dd>
+        <dt><h4>Broj riješenih kvizova:</h4></dt>
+        <dd>
+            
+            <h4> @ViewBag.NumberOfSolvedQuizes</h4>
+            
+        </dd>
+        <dt><h4>Broj pročitanih tutoriala:</h4></dt>
+        <dd>
+
+            <h4> @ViewBag.NumberOfTutorials</h4>
+
+        </dd>
+        <dt><h4>Prosječna uspješnost na kvizovima:</h4></dt>
+        <dd>
+
+            <h4> @ViewBag.Accuracy</h4>
+
+        </dd>
+        @*<dt>Password:</dt>
+        <dd>*@
+            @*[
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Promjeni Lozinku", "ChangePassword")
+            }
+            else
+            {
+                @Html.ActionLink("Create", "SetPassword")
+            }
+            ]*@
+        @*</dd>*@
+
+      
+      
+    </dl>
+</div>
+<br />
+
+<h4>Ostvareni trofeji:</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            <h4>Naziv trofeja</h4>
+        </th>
+        <th>
+            <h4>Opis</h4>
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Achievements)
+    {
+       
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+               
+            </tr>
+       
+           
+        
+
+    }
+
+
+</table>
+<br />
+
+@Html.ActionLink("Pogledaj sve dostupne trofeje","Index","Achievements")
+
+@{
+    if (User.Identity.Name == "Dominik@g.com")
+    {
+        @Html.ActionLink("Napravi kviz", "Create", "Quizs")
+    }
+}
+

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Gamification.Models.Quiz>
+
+<link href="~/Content/CustomLinks.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4 style="padding-top:30px; text-align:center">Pročitao si sve tutoriale? Sada je vrijeme za provjeru znanja. 
+    </h4>
+<br />
+<h4 style="padding-top:30px; text-align:center">
+   
+    Ovdje su svi dostupni kvizovi. Riješavanjem kvizova niže razine otključavaju se kvizovi više razine.
+</h4>
+
+
+<br/>
+<table class="table">
+    <tr>
+        <th>
+            <h4 style="font-weight:bold">Naziv Kviza</h4>
+        </th>
+        <th>
+            <h4 style="font-weight:bold">Level Kviza</h4>
+        </th>
+        <th>
+            <h4 style="font-weight:bold">Ocjena</h4>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    if ( item.QuizLevel < 2 && !item.UserQuizData.Any(q=>q.UserId == ViewBag.UserId))
+    {
+    <tr>
+        <td>
+           <h4>@Html.DisplayFor(modelItem => item.Name)</h4> 
+        </td>
+        <td>
+           <h4>@Html.DisplayFor(modelItem => item.QuizLevel)</h4> 
+        </td>
+        <td>
+           <h4>@Html.DisplayFor(modelItem => item.Rating)</h4>
+        </td>
+        <td>
+           
+            @Html.ActionLink("Pokreni kviz", "StartQuiz", new { id = item.Id },new { @class = "btn-default" })
+        </td>
+    </tr>
+    }
+    if (item.QuizLevel == 2 && !item.UserQuizData.Any(q => q.UserId == ViewBag.UserId))
+    {
+        <tr>
+            <td>
+                <h4>@Html.DisplayFor(modelItem => item.Name)</h4> 
+            </td>
+            <td>
+                <h4>@Html.DisplayFor(modelItem => item.QuizLevel)</h4>
+            </td>
+            <td>
+                <h4>@Html.DisplayFor(modelItem => item.Rating)</h4>
+            </td>
+            <td>
+               
+                @Html.ActionLink("Pokreni kviz", "StartQuiz", new { id = item.Id }, new { @class = "btn-default" })
+            </td>
+        </tr>
+    }
+
+}
+
+
+</table>

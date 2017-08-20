@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Gamification.Models.Tutorial>
+
+<link href="~/Content/CustomLinks.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $(".flip").click(function () {
+            //alert('asdsd');
+            //$(this).find(".panel").slideToggle("slow");
+            $(this).next(".panel").slideToggle("slow");
+        });
+    });
+</script>
+
+@{
+    ViewBag.Title = "Tutoriali";
+}
+
+<h3 style="text-align:center">Ovdje možeš pronači korisnu literaturu za učenje.</h3>
+<br />
+<hr />
+
+
+@{ using (Html.BeginForm())
+    {
+        foreach (var item in Model)
+        {
+            if (item.UserQuizData.Any(u => u.UserId == ViewBag.UserId))
+            {
+                <div class="flip">
+                    <h4>Naučio si sve o @item.Name -u? Provjeri svoje znanje u kvizu</h4>
+                </div>
+                <div class="panel">
+                    @Html.ActionLink("Odaberi kviz", "Index", "Quizs", new { @class = "btn-default" })
+                    <br />
+                    <hr />
+                </div>
+            }
+            else
+            {
+
+                <div class="flip">
+                    <h4>@Html.DisplayFor(model => item.Name) tutorial!</h4> <br />
+                </div>
+                <div class="panel">
+                    <h4>Nakon što proučiš @item.Name tutorial moći ćeš provjeriti znanje u kvizovima vezanima za @item.Name.</h4> <br />
+
+                    <a class="btn-default"  href="@item.TutorialLink" target="_blank">Otvori tutorial</a> | 
+
+                    @Html.ActionLink("Označi kao pročitan tutorial", "TutorialCompleted", new { id = item.id },new {@class="btn-default"})
+                </div>
+
+        <hr />
+                }
+            }
+        }
+    }
+
+    
+

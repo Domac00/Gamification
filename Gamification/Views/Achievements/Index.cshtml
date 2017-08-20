@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Gamification.Models.Achievement>
+
+@{
+    ViewBag.Title = "Trofeji";
+}
+
+
+
+<h4>Svi trofeji</h4>
+<table class="table">
+    <tr>
+        <th>
+            <h4 style="font-weight:bold">Ime</h4>
+        </th>
+        <th>
+            <h4 style="font-weight:bold">Opis</h4>
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    if (item.UserQuizData.Contains(item.UserQuizData.FirstOrDefault(u => u.UserId == ViewBag.UserId)))
+    {
+        <tr>
+            <td>
+                <h4> @Html.DisplayFor(modelItem => item.Name)  </h4>
+            </td>
+            <td>
+                <h4> @Html.DisplayFor(modelItem => item.Description)   </h4>
+           
+</td>
+            <td> <h4 style="color:green"> Osvojeni trofej! </h4> </td>
+
+        </tr>
+    }
+    else
+    {
+        <tr>
+            <td>
+                <h4>  @Html.DisplayFor(modelItem => item.Name) </h4>
+</td>
+            <td>
+                <h4>  @Html.DisplayFor(modelItem => item.Description) </h4>
+</td>
+            <td></td>
+
+        </tr>
+    }
+
+}
+
+</table>

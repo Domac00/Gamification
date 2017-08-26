@@ -135,9 +135,11 @@ namespace Gamification.Controllers
         
         public ActionResult TutorialCompleted(int id)
         {
+            var user=db.UserQuizData.Find(User.Identity.GetUserId());
             var tut = db.Tutorial.Find(id);
             var UserId = User.Identity.GetUserId();
             tut.isCompleted = true;
+            user.xp += 10;
 
             db.UserQuizData.Include("Tutorial").FirstOrDefault(u => u.UserId == UserId).Tutorial.Add(tut);
             db.SaveChanges();

@@ -53,3 +53,6 @@ a.btn-default:hover, a:active {
     background-color: #7bd77c;
 }
 
+ul {
+  list-style: none;
+}

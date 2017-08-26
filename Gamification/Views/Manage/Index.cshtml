@@ -1,6 +1,6 @@
 ﻿@model Gamification.Models.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Profil";
 }
 
 <h2>@User.Identity.Name</h2>
@@ -19,8 +19,15 @@
         </dd>
         <dt><h4>XP:</h4></dt>
         <dd>
+           
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="70"
+                     aria-valuemin="0" aria-valuemax="100" style="@ViewBag.style">
+                    @ViewBag.xp / @ViewBag.NextLevel
+                </div>
+            </div>
             
-            <h4> @ViewBag.xp / @ViewBag.NextLevel</h4>
+            
             
         </dd>
         <dt><h4>Broj riješenih kvizova:</h4></dt>

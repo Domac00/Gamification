@@ -174,6 +174,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
+    <Compile Include="Controllers\QuizCategoriesController.cs" />
     <Compile Include="Controllers\QuizsController.cs" />
     <Compile Include="Controllers\TutorialController.cs" />
     <Compile Include="Global.asax.cs">
@@ -251,10 +252,19 @@
     <Compile Include="Migrations\201708181139149_UserData Accuracy.Designer.cs">
       <DependentUpon>201708181139149_UserData Accuracy.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708211410181_QuizCategories.cs" />
+    <Compile Include="Migrations\201708211410181_QuizCategories.Designer.cs">
+      <DependentUpon>201708211410181_QuizCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708211438239_QuizCategoryId in Quiz.cs" />
+    <Compile Include="Migrations\201708211438239_QuizCategoryId in Quiz.Designer.cs">
+      <DependentUpon>201708211438239_QuizCategoryId in Quiz.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Achievement.cs" />
     <Compile Include="Models\Answer.cs" />
+    <Compile Include="Models\QuizCategory.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Question.cs" />
@@ -271,6 +281,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\checkbox.css" />
     <Content Include="Content\CustomLinks.css" />
+    <Content Include="Content\IndexStyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -356,6 +367,11 @@
     <Content Include="Views\Tutorial\Index.cshtml" />
     <Content Include="Views\Tutorial\Tutorials.cshtml" />
     <Content Include="Views\Quizs\ShowAnswers.cshtml" />
+    <Content Include="Views\QuizCategories\Create.cshtml" />
+    <Content Include="Views\QuizCategories\Delete.cshtml" />
+    <Content Include="Views\QuizCategories\Details.cshtml" />
+    <Content Include="Views\QuizCategories\Edit.cshtml" />
+    <Content Include="Views\QuizCategories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -422,6 +438,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708181139149_UserData Accuracy.resx">
       <DependentUpon>201708181139149_UserData Accuracy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708211410181_QuizCategories.resx">
+      <DependentUpon>201708211410181_QuizCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708211438239_QuizCategoryId in Quiz.resx">
+      <DependentUpon>201708211438239_QuizCategoryId in Quiz.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

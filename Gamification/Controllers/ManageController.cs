@@ -55,21 +55,31 @@ namespace Gamification.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             // prikaz profila
-            var xp = db.UserQuizData.Find(User.Identity.GetUserId()).xp;
+            var user = db.UserQuizData.Find(User.Identity.GetUserId());
+            var xp = user.xp;
             var UserId = User.Identity.GetUserId();
             ViewBag.NumberOfTutorials = db.UserQuizData.Include("Quiz").FirstOrDefault(u => u.UserId == UserId).Tutorial.Count;
             ViewBag.xp = xp;
-            ViewBag.NumberOfSolvedQuizes = db.UserQuizData.Find(User.Identity.GetUserId()).NumberOfSolvedQuizes;
+            ViewBag.NumberOfSolvedQuizes = user.NumberOfSolvedQuizes;
             ViewBag.UserId = User.Identity.GetUserId();
-            ViewBag.UserLevel = db.UserQuizData.Find(User.Identity.GetUserId()).UserLevel;
-            ViewBag.Accuracy = db.UserQuizData.Find(User.Identity.GetUserId()).Accuracy;
+            ViewBag.UserLevel = user.checkUserLevel(xp);
+            ViewBag.Accuracy = user.Accuracy;
+            
+
+           
 
             if (ViewBag.UserLevel == 1) { ViewBag.NextLevel = 30;   }
             else if (ViewBag.UserLevel == 2) { ViewBag.NextLevel = 50; }
             else if (ViewBag.UserLevel == 3) { ViewBag.NextLevel = 100; }
             else if (ViewBag.UserLevel == 4) { ViewBag.NextLevel = 200; }
-            
-          
+
+            var width = (decimal)ViewBag.xp / (decimal)ViewBag.NextLevel;
+            width *= 100;
+            width =Math.Round((decimal)width,0);
+            width.ToString();
+            string style = "width:" + width + "%";
+            ViewBag.style = style;
+
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."

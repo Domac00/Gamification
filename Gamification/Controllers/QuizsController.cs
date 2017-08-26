@@ -25,7 +25,7 @@ namespace Gamification.Controllers
             var xp = db.UserQuizData.Find(User.Identity.GetUserId()).xp;
             ViewBag.xp = xp;
             ViewBag.UserId = User.Identity.GetUserId();
-            return View(db.Quizes.ToList());
+            return View(db.QuizCategory.ToList());
         }
 
         // GET: Quizs/Details/5
@@ -47,6 +47,7 @@ namespace Gamification.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.QuizCategoryId = new SelectList(db.QuizCategory, "Id", "Name");
             return View();
         }
 
@@ -60,6 +61,7 @@ namespace Gamification.Controllers
             quiz.SumOfGrades = 0;
             quiz.Rating = 0;
             quiz.NumberOfRatings = 0;
+           
             if (ModelState.IsValid)
             {   //Dodavanje kviza u bazu
                 db.Quizes.Add(quiz);

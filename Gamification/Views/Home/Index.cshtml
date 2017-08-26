@@ -1,14 +1,41 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿<link href="~/Content/CustomLinks.css" rel="stylesheet" />
+<link href="~/Content/IndexStyle.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Početna";
 }
 
+<br />
 
-@{ 
-    if (User.Identity.IsAuthenticated)
-    {
-       <h3 style="text-align:center">Nauči sve o web tehnologijama, te provjeri svoje znanje u kvizu. </h3>
-    }else
-    {
-        <h4> Prijavi se ili registriraj za početak</h4>
-    }
-}
+
+<div class="jumbotron">
+    <div class="container">
+        <h2>Tutoriali.</h2>
+        <p>Čitajući tutoriale dobivaš xp, te tako napreduješ kroz razine.</p>
+        <p>@Html.ActionLink("Tutoriali","Tutorials","Tutorial",null, new { @class = "btn-default" })</p>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div class="container">
+        <h2>Kvizovi.</h2>
+        <p>Potvrdi znanje u kvizovima, te za svaki kviz dobivaš xp koji ovisi o razini kviza i ostvarenim bodovima.</p>
+        <p>@Html.ActionLink("Kvizovi", "Index", "Quizs",null, new { @class = "btn-default" })</p>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div class="container">
+        <h2>High Score.</h2>
+        <p>Pogledaj kako stojiš u odnosu na druge korisnike. Budi korisnik s najviše xp-a i trofeja.</p>
+        <p>@Html.ActionLink("High Score", "HighScore", "Quizs",null, new { @class = "btn-default" })</p>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div class="">
+        <h2>Osobni profil.</h2>
+        <p>Uredi svoj profil, te pogledaj trenutno stanje xp-a, trofeja i dr.</p>
+        <p>@Html.ActionLink("Profil", "Index", "Manage",null, new { @class = "btn-default" })</p>
+    </div>
+</div>
+

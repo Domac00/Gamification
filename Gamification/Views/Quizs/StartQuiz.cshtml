@@ -1,5 +1,7 @@
 ﻿@model Gamification.Models.QuizViewModel
 
+<link href="~/Content/CustomLinks.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "StartQuiz";
 }
@@ -12,27 +14,32 @@
    
     @using (Html.BeginForm())
     {
-
-      <h3>@Html.DisplayFor(model => Model.Name)</h3>
         
-        <br />
+            <h3>@Html.DisplayFor(model => Model.Name)</h3> <hr />
 
-        <h4>@Html.DisplayFor(model => Model.Question) </h4>
-        <br />
-
-
-        foreach (var item in Model.Answers)
-        {
-            <div class="radio-btn">
-                @Html.RadioButtonFor(model => Model.AnswerId, item.Id) @Html.DisplayFor(model => item.Text) <br />
-            </div>
             <br />
+            <div style="text-align:center">
+                <h3>@Html.DisplayFor(model => Model.Question) </h3> 
+                <br />
 
-        }
 
-        
+                @foreach (var item in Model.Answers)
+                {
+                   <ul style="list-style:none">
+                       <li>
+                           <div >
+                               <h4>  @Html.RadioButtonFor(model => Model.AnswerId, item.Id) @Html.DisplayFor(model => item.Text) </h4><br />
+                           </div>
+                       </li>
+                   </ul>
+                    <br />
+
+                }
 
 
-         <input type="submit" value="pošalji"  />
+
+
+                <input type="submit" value="Odgovori" class="btn btn-default" />
+            </div>
     }
 </div>

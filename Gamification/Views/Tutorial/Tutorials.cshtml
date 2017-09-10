@@ -31,12 +31,15 @@
             {
                 <div class="flip">
                     <h4>Naučio si sve o @item.Name -u? Provjeri svoje znanje u kvizu</h4>
+                    <br />
+                    
                 </div>
                 <div class="panel">
-                    @Html.ActionLink("Odaberi kviz", "Index", "Quizs", new { @class = "btn-default" })
+                    @Html.ActionLink("Odaberi kviz", "Index", "Quizs", null, new { @class="btn-default"})
                     <br />
-                    <hr />
+                   
                 </div>
+                <hr />
             }
             else
             {

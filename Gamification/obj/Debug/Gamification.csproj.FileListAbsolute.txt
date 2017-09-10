@@ -88,3 +88,7 @@ C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\o
 C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.QuizCategories.resources
 C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.QuizCategoryIdinQuiz.resources
 C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.csprojResolveAssemblyReference.cache
+C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.Image.resources
+C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.NumberOfCompletedTutorials.resources
+C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.NumberOFAchiievements.resources
+C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.admin.resources

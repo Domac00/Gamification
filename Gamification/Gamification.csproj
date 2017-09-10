@@ -260,6 +260,22 @@
     <Compile Include="Migrations\201708211438239_QuizCategoryId in Quiz.Designer.cs">
       <DependentUpon>201708211438239_QuizCategoryId in Quiz.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709022319524_Image.cs" />
+    <Compile Include="Migrations\201709022319524_Image.Designer.cs">
+      <DependentUpon>201709022319524_Image.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709051018399_NumberOfCompletedTutorials.cs" />
+    <Compile Include="Migrations\201709051018399_NumberOfCompletedTutorials.Designer.cs">
+      <DependentUpon>201709051018399_NumberOfCompletedTutorials.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709061026048_NumberOFAchiievements.cs" />
+    <Compile Include="Migrations\201709061026048_NumberOFAchiievements.Designer.cs">
+      <DependentUpon>201709061026048_NumberOFAchiievements.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709061628445_admin.cs" />
+    <Compile Include="Migrations\201709061628445_admin.Designer.cs">
+      <DependentUpon>201709061628445_admin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Achievement.cs" />
@@ -281,6 +297,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\checkbox.css" />
     <Content Include="Content\CustomLinks.css" />
+    <Content Include="Content\Images\profile-default.png" />
     <Content Include="Content\IndexStyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -372,6 +389,9 @@
     <Content Include="Views\QuizCategories\Details.cshtml" />
     <Content Include="Views\QuizCategories\Edit.cshtml" />
     <Content Include="Views\QuizCategories\Index.cshtml" />
+    <Content Include="Views\Quizs\UploadImage.cshtml" />
+    <Content Include="Views\Manage\UploadImage.cshtml" />
+    <Content Include="Views\Quizs\CompletedQuizzes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -444,6 +464,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708211438239_QuizCategoryId in Quiz.resx">
       <DependentUpon>201708211438239_QuizCategoryId in Quiz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709022319524_Image.resx">
+      <DependentUpon>201709022319524_Image.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709051018399_NumberOfCompletedTutorials.resx">
+      <DependentUpon>201709051018399_NumberOfCompletedTutorials.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709061026048_NumberOFAchiievements.resx">
+      <DependentUpon>201709061026048_NumberOFAchiievements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709061628445_admin.resx">
+      <DependentUpon>201709061628445_admin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

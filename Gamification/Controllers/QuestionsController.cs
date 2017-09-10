@@ -60,7 +60,8 @@ namespace Gamification.Controllers
 
                 db.Questions.Add(question);
                 db.SaveChanges();
-                return RedirectToAction("Create",new { id = QuizId});
+                //return RedirectToAction("Create",new { id = QuizId});
+                return RedirectToAction("Create", "Answers", new { id = question.Id , QuestionText = question.Text });
             }
 
             ViewBag.QuizId = new SelectList(db.Quizes, "Id", "Name", question.QuizId);

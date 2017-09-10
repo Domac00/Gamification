@@ -15,7 +15,7 @@ namespace Gamification.Models
 
         public string Question { get; set; }
 
-       
+        public bool addScore { get; set; }
 
         public ICollection<Answer> Answers { get; set; }
     }

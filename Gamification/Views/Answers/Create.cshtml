@@ -4,7 +4,7 @@
     ViewBag.Title = "Odgovori";
 }
 
-<h2>Dodaj odgovore za pitanje</h2>
+<h2>Dodaj odgovore za pitanje: @ViewBag.QuestionText</h2>
 
 
 @using (Html.BeginForm()) 
@@ -53,7 +53,7 @@
 }
 
 <div>
-   @Html.ActionLink("Povratak na popis pitanja", "Index", "Questions", new { id = ViewBag.QuizId},null)
+    @Html.ActionLink("Iduće pitanje","Create","Questions",new { id=ViewBag.QuizId},null)
 </div>
 
 @section Scripts {

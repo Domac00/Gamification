@@ -156,7 +156,7 @@ namespace Gamification.Controllers
                 var i = userName.IndexOf('@');
                 userName = userName.Remove(i);
 
-                var user = new ApplicationUser { UserName = userName, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -168,13 +168,15 @@ namespace Gamification.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     UserQuizData uqd = new UserQuizData();
+                    uqd.UserName = userName;
                     uqd.NumberOfSolvedQuizes = 0;
+                    uqd.NumberOfCompletedTutorials = 0;
+                    uqd.NumberOfAchievements = 0;
                     uqd.xp = 0;
                     uqd.UserId = user.Id;
                     uqd.UserLevel = 1;
                     uqd.Accuracy = 0;
-                  
-                    uqd.UserName = userName;
+                    uqd.ImageUrl = "profile-default.png";                     uqd.UserName = userName;
                     db.UserQuizData.Add(uqd);
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");

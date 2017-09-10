@@ -15,13 +15,21 @@ namespace Gamification.Models
 
         public string UserName { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public int xp { get; set; }
 
         public int NumberOfSolvedQuizes { get; set; }
 
-        public virtual ICollection<Achievement> Achievement { get; set; }
+        public int NumberOfCompletedTutorials { get; set; }
+
+        public int NumberOfAchievements { get; set; }
 
         public float Accuracy { get; set; }
+
+        public bool isAdmin { get; set; }
+
+        public virtual ICollection<Achievement> Achievement { get; set; }
 
         public virtual ICollection<Quiz> Quiz { get; set; }
 

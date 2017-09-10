@@ -2,40 +2,73 @@
 @{
     ViewBag.Title = "Profil";
 }
+<link href="~/Content/CustomLinks.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script>
 
-<h2>@User.Identity.Name</h2>
+    $(document).ready(function () {
+        $(".flip").click(function () {
+            //alert('asdsd');
+            //$(this).find(".panel").slideToggle("slow");
+            $(this).next(".panel").slideToggle("slow");
+        });
+    });
+</script>
 
 
-@*<p class="text-success">@ViewBag.StatusMessage</p>*@
+
+<div class="container">
+    <div style="padding:20px; ">
+        <img src="~/Content/Images/@Model.ImageUrl" style="width:150px;height:150px" class="img-responsive img-rounded" /> 
+    </div>
+    <a style="color:grey" href="Manage/UploadImage">Promijeni sliku profila</a>
+    <h2>@Model.UserName</h2>
+    <div class="flip" style="text-align:left;color:grey">
+        <a style="color:grey">Promijeni ime</a>
+    </div>
+  <div class="panel" style="text-align:left">
+      @using (Html.BeginForm("EditName", "Manage", FormMethod.Post))
+      {
+      <p>Novo ime: </p><input type="text" name="name" />
+      <input type="submit" value="Promijeni" />
+      }
+  </div>
+ 
+</div>
+
 <div>
     <h4></h4>
     <hr />
     <dl class="dl-horizontal">
         <dt><h4>Level:</h4></dt>
         <dd>
-
             <h4> @ViewBag.UserLevel </h4>
-
         </dd>
         <dt><h4>XP:</h4></dt>
         <dd>
-           
             <div class="progress">
                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="70"
                      aria-valuemin="0" aria-valuemax="100" style="@ViewBag.style">
                     @ViewBag.xp / @ViewBag.NextLevel
                 </div>
             </div>
-            
-            
-            
         </dd>
         <dt><h4>Broj riješenih kvizova:</h4></dt>
         <dd>
             
             <h4> @ViewBag.NumberOfSolvedQuizes</h4>
+           
             
         </dd>
+        <dt><h4>Broj osvojenih trofeja:</h4></dt>
+        <dd>
+
+            <h4> @ViewBag.NumberOfAchievements</h4>
+
+
+        </dd>
+        
         <dt><h4>Broj pročitanih tutoriala:</h4></dt>
         <dd>
 
@@ -48,27 +81,11 @@
             <h4> @ViewBag.Accuracy</h4>
 
         </dd>
-        @*<dt>Password:</dt>
-        <dd>*@
-            @*[
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Promjeni Lozinku", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
-            ]*@
-        @*</dd>*@
-
-      
-      
     </dl>
 </div>
 <br />
 
-<h4>Ostvareni trofeji:</h4>
+<h4 style="font-weight:bold">Ostvareni trofeji:</h4>
 
 <table class="table">
     <tr>
@@ -82,32 +99,33 @@
 
     @foreach (var item in Model.Achievements)
     {
-       
-            <tr>
+
+            <tr style="font-weight:bold">
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => item.Name) 
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                
             </tr>
-       
-           
-        
-
     }
-
 
 </table>
 <br />
+@Html.ActionLink("Dostupni trofeji", "Index", "Achievements", null, new { @class="btn-default"})
+<br />
 
-@Html.ActionLink("Pogledaj sve dostupne trofeje","Index","Achievements")
-
+<br />
 @{
-    if (User.Identity.Name == "Dominik@g.com")
+    if (Model.isAdmin)
     {
-        @Html.ActionLink("Napravi kviz", "Create", "Quizs")
+        <hr />
+        @Html.ActionLink("Dodaj trofej", "Create", "Achievements", null, new { @class = "btn-default" })        <br />
+        <br />
+        @Html.ActionLink("Napravi novi kviz", "create", "Quizs", null, new { @class = "btn-default" })        <br />
+        <br />
+        @Html.ActionLink("Dodaj novu kategoriju", "Create", "QuizCategories", null, new { @class = "btn-default" })
     }
 }
 

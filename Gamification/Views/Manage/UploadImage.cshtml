@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Promijeni sliku";
+}
+
+<h2>Dodaj sliku</h2>
+
+@using (Html.BeginForm("UploadImage", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+
+        <input type="file" name="uploadFile" /> <br />
+        <input type="submit" value="Upload" />
+    </div>
+}

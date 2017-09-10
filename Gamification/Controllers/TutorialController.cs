@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Gamification;
 using Gamification.Models;
 using Microsoft.AspNet.Identity;
+using System.Data.Entity.Migrations;
 
 namespace Gamification.Controllers
 {
@@ -140,7 +141,10 @@ namespace Gamification.Controllers
             var UserId = User.Identity.GetUserId();
             tut.isCompleted = true;
             user.xp += 10;
+            user.UserLevel = user.checkUserLevel(user.xp);
+            user.NumberOfCompletedTutorials++;
 
+            db.UserQuizData.AddOrUpdate(user);
             db.UserQuizData.Include("Tutorial").FirstOrDefault(u => u.UserId == UserId).Tutorial.Add(tut);
             db.SaveChanges();
             return RedirectToAction("Tutorials");

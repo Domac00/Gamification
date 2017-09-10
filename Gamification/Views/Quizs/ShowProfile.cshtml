@@ -3,8 +3,16 @@
 @{
     ViewBag.Title = "Profil";
 }
+<link href="~/Content/CustomLinks.css" rel="stylesheet" />
 
-<h2>@Html.DisplayFor(model=>model.UserName)</h2>
+
+<div class="container">
+    <div style="padding:20px; ">
+        <img src="~/Content/Images/@Model.ImageUrl" style="width:150px;height:150px" class="img-responsive img-rounded" />
+    </div>
+    <h2>@Model.UserName</h2>
+
+</div>
 
 <div>
     <h4></h4>
@@ -12,26 +20,33 @@
     <dl class="dl-horizontal">
         <dt><h4>Level:</h4></dt>
         <dd>
-
-            <h4> @Html.DisplayFor(model=>model.UserLevel) </h4>
-
+            <h4> @Model.UserLevel </h4>
         </dd>
         <dt><h4>XP:</h4></dt>
         <dd>
-
-            <h4> @Html.DisplayFor(model=>model.xp)</h4>
-
+            
+               <h4>@Model.xp</h4>
+            
         </dd>
         <dt><h4>Broj riješenih kvizova:</h4></dt>
         <dd>
 
-            <h4> @Html.DisplayFor(model=>model.NumberOfSolvedQuizes)</h4>
+            <h4> @Model.NumberOfSolvedQuizes</h4>
 
         </dd>
+     
+        <dt><h4>Prosječna uspješnost na kvizovima:</h4></dt>
+        <dd>
 
+            <h4> @Model.Accuracy</h4>
 
+        </dd>
     </dl>
 </div>
+<br />
+
+
+
 <br />
 
 <h4>Ostvareni trofeji:</h4>

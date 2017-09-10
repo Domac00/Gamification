@@ -4,40 +4,28 @@
 
 @{
     ViewBag.Title = "Score";
-    string aMsg = ViewBag.message;
+    @*string aMsg = ViewBag.message;
     string lMsg = ViewBag.LevelMsg;
     if (aMsg != null)
     {
-
+        <p>asdasd</p>
         <script type="text/javascript">
-           alert('@aMsg')
-
-
+            alert('@aMsg')
+           
         </script>
-
     }
-
     if (lMsg != null)
     {
-
         <script type="text/javascript">
            alert('@lMsg')
-
-
         </script>
-
-    }
-
+    }*@
 }
-
-
-
 
 <h2 style="text-align:center">
    Vaš rezultat: @Html.DisplayFor(model => Model.score) / @ViewBag.NumberOfQuestions točnih odgovora, odnosno @Html.DisplayFor(model => model.Percentage) %.
 </h2>
     <br />
-
 @{ 
     if(Model.Percentage >= 80)
     {
@@ -57,19 +45,34 @@
     }
 }
 <br />
+
+@if (Model.addScore)
+{
 <h2 style="text-align:center"> + @ViewBag.xpToShow xp</h2>
+<br />
+if (ViewBag.message != null)
+{
+    <h4 style="text-align:center">Osvojen trofej: <span style="color:green"> @ViewBag.message</span></h4>
+    }
+}
+else
+{
+    <h4 style="text-align:center">Ovo je kviz samo za vježbu.</h4>
+    <h2 style="text-align:center"> + 0xp</h2>
+}
+
 <br />
 <div style="text-align:center">
     @Html.ActionLink("Pogledaj svoje odgovore", "ShowAnswers", new { UserAnswers = Json.Encode(Model.UserAnswers), QuizId = Model.QuizId }, new { @class = "btn-default" })
-
 
 </div>
 <br />
 <hr />
 
-
+@if (Model.addScore)
+{
 <h4>Ocijeni kviz</h4>
-@using (Html.BeginForm())
+using (Html.BeginForm())
 {
     <div class="radio">
         @Html.RadioButtonFor(model => Model.Rate, 1) <p>1</p>
@@ -80,8 +83,7 @@
     </div>
 <input type="submit" value="Ocijeni" class="btn btn-secondary" />
 }
-
-
+}
 <br />
     @*@Html.ActionLink("Popis kvizova", "Index", "Quizs")*@
 

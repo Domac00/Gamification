@@ -27,6 +27,8 @@ namespace Gamification.Models
 
         public string msg { get; set; }
 
+        public bool addScore { get; set; }
+
         public UserScore() { score = 0; UserAnswers = new List<int>(); }
     }
 }

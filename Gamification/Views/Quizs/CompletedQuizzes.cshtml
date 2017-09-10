@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Gamification.Models.QuizCategory>
+
+<link href="~/Content/CustomLinks.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $(".flip").click(function () {
+            //alert('asdsd');
+            //$(this).find(".panel").slideToggle("slow");
+            $(this).next(".panel").slideToggle("slow");
+        });
+    });
+</script>
+@{
+    ViewBag.Title = "CompletedQuizzes";
+}
+
+<h4 style="padding-top:30px; text-align:center">Već završeni kvizovi.  </h4>
+
+    <br />
+    <h4 style="padding-top:30px; text-align:center">
+
+        Ovdje su svi već riješeni kvizovi sortirani po kategorijama. Riješavanjem ovih kvizova nećeš dobiti bodove i trofeje.
+    </h4>
+
+@* ------------------------------------------------ *@
+
+@{
+
+        foreach (var category in Model)
+        {
+            <div class="flip">
+                <h4 style="font-weight:bold"> @Html.DisplayFor(cName => category.Name)</h4>
+            </div>
+
+            <div class="panel">
+                <table class="table">
+                    <tr>
+                        <th style="text-align:center">
+                            <h4 style="font-weight:bold">Naziv Kviza</h4>
+                        </th>
+                        <th style="text-align:center">
+                            <h4 style="font-weight:bold">Razina Kviza</h4>
+                        </th>
+                        <th style="text-align:center">
+                            <h4 style="font-weight:bold">Ocjena</h4>
+                        </th>
+                        <th></th>
+                    </tr>
+
+
+
+                    @foreach (var item in category.Quiz)
+                    {
+
+
+                        if (item.UserQuizData.Any(q => q.UserId == ViewBag.UserId))
+                        {
+                            <tr>
+                                <td>
+                                    <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+                                </td>
+                                <td>
+                                    <h4>@Html.DisplayFor(modelItem => item.QuizLevel)</h4>
+                                </td>
+                                <td>
+                                    <h4>@Html.DisplayFor(modelItem => item.Rating)</h4>
+                                </td>
+                                <td>
+
+                                    @Html.ActionLink("Pokreni kviz", "StartQuiz", new { id = item.Id, addScore = false }, new { @class = "btn-default" })
+                                </td>
+                            </tr>
+                        }
+
+
+
+                    }
+
+
+
+
+                </table>
+            </div>
+                        }
+
+
+    }
+

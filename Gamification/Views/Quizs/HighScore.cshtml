@@ -12,6 +12,9 @@
     <table class="table">
         <tr>
             <th>
+
+            </th>
+            <th>
                 <h4 style="font-weight:bold">User Name</h4>
             </th>
             <th>
@@ -20,24 +23,67 @@
             <th>
                 <h4 style="font-weight:bold">XP</h4>
             </th>
+            <th>
+                <h4 style="font-weight:bold">Broj trofeja</h4>
+            </th>
+            <th>
+
+            </th>
+         
         </tr>
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
+            if (item.UserId == ViewBag.UserId)
+            {
+            <tr style="background-color:lightgrey">
+                <td style="max-width:30px;max-height:20px">
+                    <img src="~/Content/Images/@item.ImageUrl" style="display:block" width="100%" height="100%" class="img-responsive img-rounded" />
+                </td>
+                <td style="vertical-align:middle">
                     <h4>@Html.DisplayFor(modelItem => item.UserName)</h4>
                 </td>
-                <td>
+                
+                <td style="vertical-align:middle">
                     <h4>@Html.DisplayFor(modelItem => item.UserLevel)</h4>
                 </td>
-                <td>
+                <td style="vertical-align:middle">
                     <h4> @Html.DisplayFor(model => item.xp)</h4>
                 </td>
-                <td>
-                     @Html.ActionLink("Pogledaj profil", "ShowProfile", new { id = item.UserId}, new { @class = "btn-default" })
+                <td style="vertical-align:middle">
+                    <h4> @Html.DisplayFor(model => item.NumberOfAchievements)</h4>
                 </td>
+                <td style="vertical-align:middle">
+                     @Html.ActionLink("Pogledaj profil", "ShowProfile", new { id = item.UserId }, new { @class = "btn-default" })
+                </td>
+                
             </tr>
+            }
+            else
+            {
+                <tr>
+                    <td style="max-width:30px;max-height:20px">
+                        <img src="~/Content/Images/@item.ImageUrl" style="display:block" width="100%" height="100%" class="img-responsive img-rounded" />
+                    </td>
+                    <td style="vertical-align:middle">
+                        <h4>@Html.DisplayFor(modelItem => item.UserName)</h4>
+                    </td>
+
+                    <td style="vertical-align:middle">
+                        <h4>@Html.DisplayFor(modelItem => item.UserLevel)</h4>
+                    </td>
+                    <td style="vertical-align:middle">
+                        <h4> @Html.DisplayFor(model => item.xp)</h4>
+                    </td>
+                    <td style="vertical-align:middle">
+                        <h4> @Html.DisplayFor(model => item.NumberOfAchievements)</h4>
+                    </td>
+                    <td style="vertical-align:middle">
+                        @Html.ActionLink("Pogledaj profil", "ShowProfile", new { id = item.UserId }, new { @class = "btn-default" })
+                    </td>
+
+                </tr>
+            }
         }
 
 

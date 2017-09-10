@@ -38,9 +38,11 @@ namespace Gamification.Controllers
         }
 
         // GET: Answers/Create
-        public ActionResult Create(int id)
+        [ValidateInput(false)]
+        public ActionResult Create(int id , string QuestionText)
         {
             // ViewBag.QuestionId = new SelectList(db.Questions, "Id", "Text");
+            ViewBag.QuestionText = QuestionText;
             ViewBag.QuizId = db.Questions.FirstOrDefault(q => q.Id == id).QuizId;
             ViewBag.QuestionId = id;
             return View();
@@ -53,6 +55,7 @@ namespace Gamification.Controllers
         [ValidateInput(false)]
         public ActionResult Create( Answer answer, int QuestionId)
         {
+            ViewBag.QuizId = db.Questions.Find(QuestionId).QuizId;
             if (ModelState.IsValid)
             {
                 answer.QuestionId = QuestionId;

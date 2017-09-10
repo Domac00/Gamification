@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Kreiraj pitanja za kviz</h2>
+<h2>Kreiraj pitanje za kviz</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Question</h4>
+        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -42,7 +42,7 @@
 }
 
 <div>
-    @Html.ActionLink("Završi", "Index", new { id=ViewBag.QuizId})
+    @Html.ActionLink("Završi", "Index", "Quizs")
 </div>
 
 @section Scripts {

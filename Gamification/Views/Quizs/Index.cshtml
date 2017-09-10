@@ -27,10 +27,17 @@
 
 
 <br/>
+
 @{
+    int Level = ViewBag.Level;
+    
+}
+
+@{ 
 
     foreach (var category in Model)
     {
+        
         <div class="flip">
             <h4 style="font-weight:bold"> @Html.DisplayFor(cName => category.Name)</h4>
         </div>
@@ -42,21 +49,23 @@
                         <h4 style="font-weight:bold">Naziv Kviza</h4>
                     </th>
                     <th style="text-align:center">
-                        <h4 style="font-weight:bold">Level Kviza</h4>
+                        <h4 style="font-weight:bold">Razina Kviza</h4>
                     </th>
                     <th style="text-align:center">
                         <h4 style="font-weight:bold">Ocjena</h4>
                     </th>
                     <th></th>
                 </tr>
+                
+               
 
-
-                @foreach (var item in category.Quiz)
+                    @foreach (var item in category.Quiz)
                 {
 
 
-                    if (item.QuizLevel < 2 && !item.UserQuizData.Any(q => q.UserId == ViewBag.UserId))
-                    {
+
+                        if (item.QuizLevel == Level &&  !item.UserQuizData.Any(q => q.UserId == ViewBag.UserId))
+                        {
                         <tr>
                             <td>
                                 <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
@@ -69,31 +78,14 @@
                             </td>
                             <td>
 
-                                @Html.ActionLink("Pokreni kviz", "StartQuiz", new { id = item.Id }, new { @class = "btn-default" })
+                                @Html.ActionLink("Pokreni kviz", "StartQuiz", new { id = item.Id , addScore=true}, new { @class = "btn-default" })
                             </td>
                         </tr>
+                        }
+
+
+
                     }
-                    if (item.QuizLevel == 2 && !item.UserQuizData.Any(q => q.UserId == ViewBag.UserId))
-                    {
-                        <tr>
-                            <td>
-                                <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
-                            </td>
-                            <td>
-                                <h4>@Html.DisplayFor(modelItem => item.QuizLevel)</h4>
-                            </td>
-                            <td>
-                                <h4>@Html.DisplayFor(modelItem => item.Rating)</h4>
-                            </td>
-                            <td>
-
-                                @Html.ActionLink("Pokreni kviz", "StartQuiz", new { id = item.Id }, new { @class = "btn-default" })
-                            </td>
-                        </tr>
-                    }
-
-
-                }
 
 
 
@@ -102,4 +94,14 @@
         </div>
     }
 
+
 }
+
+<br />
+<h4 style="padding-top:30px; text-align:center">Probaj ponovno riješiti kvizove. Za ponovljene kvizove se ne dobivaju bodovi i trofeji.</h4>
+<div style="text-align:center">
+    @Html.ActionLink("Popis riješenih kvizova", "CompletedQuizzes", null, new { @class = "btn-default" })
+</div>
+
+
+

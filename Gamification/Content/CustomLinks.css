@@ -5,6 +5,7 @@
     text-align: center;
     background-color: white;
     border: none;
+    
 }
 
 .panel {
@@ -12,6 +13,7 @@
     padding: 50px;
     display: none;
 }
+
 
 a.btn-default:link, a:visited {
     background-color: grey;
@@ -26,32 +28,14 @@ a.btn-default:link, a:visited {
 a.btn-default:hover, a:active {
     background-color: #7bd77c;
 }
-.panel, .flip {
-    padding: 5px;
-    text-align: center;
-    background-color: white;
-    border: none;
-}
 
-.panel {
-   
-    padding: 50px;
-    display: none;
-}
 
-a.btn-default:link, a:visited {
-    background-color: grey;
-    color: white;
-    padding: 14px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+a:link{
+    color:black;
 }
 
 
-a.btn-default:hover, a:active {
-    background-color: #7bd77c;
-}
+
 
 ul {
   list-style: none;

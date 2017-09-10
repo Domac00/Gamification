@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Gamification.Models;
+using System.Data.Entity.Migrations;
+
 
 namespace Gamification.Controllers
 {
@@ -52,19 +54,21 @@ namespace Gamification.Controllers
         private Context db = new Context();
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public async Task<ActionResult> Index(bool? edit)
         {
             // prikaz profila
             var user = db.UserQuizData.Find(User.Identity.GetUserId());
             var xp = user.xp;
             var UserId = User.Identity.GetUserId();
+
             ViewBag.NumberOfTutorials = db.UserQuizData.Include("Quiz").FirstOrDefault(u => u.UserId == UserId).Tutorial.Count;
             ViewBag.xp = xp;
             ViewBag.NumberOfSolvedQuizes = user.NumberOfSolvedQuizes;
+            ViewBag.NumberOfAchievements = user.NumberOfAchievements;
             ViewBag.UserId = User.Identity.GetUserId();
             ViewBag.UserLevel = user.checkUserLevel(xp);
             ViewBag.Accuracy = user.Accuracy;
-            
+            ViewBag.edit = false;
 
            
 
@@ -80,14 +84,14 @@ namespace Gamification.Controllers
             string style = "width:" + width + "%";
             ViewBag.style = style;
 
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-                : "";
+            //ViewBag.StatusMessage =
+            //    message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+            //    : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+            //    : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
+            //    : message == ManageMessageId.Error ? "An error has occurred."
+            //    : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
+            //    : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+            //    : "";
 
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
@@ -97,10 +101,67 @@ namespace Gamification.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
-                Achievements = db.UserQuizData.FirstOrDefault(u=>u.UserId == userId).Achievement.ToList()
-                
+                Achievements = db.UserQuizData.FirstOrDefault(u => u.UserId == userId).Achievement.ToList(),
+                ImageUrl = db.UserQuizData.FirstOrDefault(u => u.UserId == userId).ImageUrl,
+                UserName = db.UserQuizData.FirstOrDefault(u => u.UserId == userId).UserName,
+                isAdmin = db.UserQuizData.FirstOrDefault(u => u.UserId == userId).isAdmin
+
+
             };
+            
             return View(model);
+        }
+
+        //Upload Image for User
+
+
+        [HttpGet]
+        public ActionResult UploadImage()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UploadImage(HttpPostedFileBase uploadFile)
+        {
+            var user = db.UserQuizData.Find(User.Identity.GetUserId());
+            
+            if (uploadFile != null)
+            {
+
+                string ImageName = Guid.NewGuid().ToString();
+                string Path = Server.MapPath("~/Content/Images/" + ImageName);
+                var ext = uploadFile.FileName;
+                ext = ext.Substring(ext.IndexOf("."));
+
+                // save image in folder
+                uploadFile.SaveAs(Path + ext);
+
+                user.ImageUrl = ImageName+ext;
+                db.UserQuizData.AddOrUpdate(user);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+        //Promjena imena
+        [HttpGet]
+        public ActionResult EditName()
+        {
+            bool edit = true;
+            return RedirectToAction("Index","Manage",edit);
+        }
+
+        [HttpPost]
+        public ActionResult EditName(string name)
+        {
+            ViewBag.edit = false;
+            var user = db.UserQuizData.Find(User.Identity.GetUserId());
+            user.UserName = name;
+            db.UserQuizData.AddOrUpdate(user);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         //
@@ -361,7 +422,9 @@ namespace Gamification.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+      
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 

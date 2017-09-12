@@ -10,10 +10,16 @@
 <table class="table">
     <tr>
         <th>
+
+        </th>
+        <th>
             <h4 style="font-weight:bold">Ime</h4>
         </th>
         <th>
             <h4 style="font-weight:bold">Opis</h4>
+        </th>
+        <th>
+            <h4 style="font-weight:bold">Tip trofeja</h4>
         </th>
         
         <th></th>
@@ -24,6 +30,9 @@
     if (item.UserQuizData.Contains(item.UserQuizData.FirstOrDefault(u => u.UserId == ViewBag.UserId)))
     {
         <tr>
+            <td style="max-height:40px;max-width:40px">
+                <img src="~/Content/Images/@item.AchievementCategory.ImageUrl" style="display:block;height:100%; max-height:40px" class="img-responsive img-rounded" />
+            </td>
             <td>
                 <h4> @Html.DisplayFor(modelItem => item.Name)  </h4>
             </td>
@@ -31,6 +40,9 @@
                 <h4> @Html.DisplayFor(modelItem => item.Description)   </h4>
            
 </td>
+            <td>
+                <h4> @Html.DisplayFor(modelItem => item.AchievementCategory.Name)  </h4>
+            </td>
             <td> <h4 style="color:green"> Osvojeni trofej! </h4> </td>
 
         </tr>
@@ -38,12 +50,18 @@
     else
     {
         <tr>
+            <td style="max-height:30px;max-width:20px">
+                <img src="~/Content/Images/@item.AchievementCategory.ImageUrl" style="display:block;height:100%; max-height:30px" class="img-responsive img-rounded" />
+            </td>
             <td>
                 <h4>  @Html.DisplayFor(modelItem => item.Name) </h4>
 </td>
             <td>
                 <h4>  @Html.DisplayFor(modelItem => item.Description) </h4>
 </td>
+            <td>
+                <h4> @Html.DisplayFor(modelItem => item.AchievementCategory.Name)  </h4>
+            </td>
             <td></td>
 
         </tr>

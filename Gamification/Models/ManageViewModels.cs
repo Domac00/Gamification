@@ -13,6 +13,7 @@ namespace Gamification.Models
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
         public IList<Achievement> Achievements { get; set; }
+        public IList<AchievementCategory> AchievementCategory { get; set; }
         public string ImageUrl { get; set; }
         public string UserName { get; set; }
         public bool isAdmin { get; set; }

@@ -26,7 +26,7 @@
                     @{ if (User.Identity.IsAuthenticated) {
                     <li>@Html.ActionLink("Gdje naučiti?", "Tutorials", "Tutorial")</li>
                     <li>@Html.ActionLink("Popis kvizova", "Index", "Quizs")</li>
-                    <li>@Html.ActionLink("High Score", "HighScore", "Quizs")</li>
+                    <li>@Html.ActionLink("High Score", "HighScore", "Quizs",new { orderBy=1},null)</li>
                             }
                         }
                 </ul>

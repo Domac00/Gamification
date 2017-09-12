@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AchievementCategoriesController.cs" />
     <Compile Include="Controllers\AchievementsController.cs" />
     <Compile Include="Controllers\AnswersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -276,9 +277,26 @@
     <Compile Include="Migrations\201709061628445_admin.Designer.cs">
       <DependentUpon>201709061628445_admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709101135126_achievementCategory.cs" />
+    <Compile Include="Migrations\201709101135126_achievementCategory.Designer.cs">
+      <DependentUpon>201709101135126_achievementCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709101159565_achCategory.cs" />
+    <Compile Include="Migrations\201709101159565_achCategory.Designer.cs">
+      <DependentUpon>201709101159565_achCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709101232567_achCategoryId.cs" />
+    <Compile Include="Migrations\201709101232567_achCategoryId.Designer.cs">
+      <DependentUpon>201709101232567_achCategoryId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709121820026_achImage.cs" />
+    <Compile Include="Migrations\201709121820026_achImage.Designer.cs">
+      <DependentUpon>201709121820026_achImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Achievement.cs" />
+    <Compile Include="Models\AchievementCategory.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\QuizCategory.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -298,6 +316,8 @@
     <Content Include="Content\checkbox.css" />
     <Content Include="Content\CustomLinks.css" />
     <Content Include="Content\Images\profile-default.png" />
+    <Content Include="Content\Images\TrofejNapredni.png" />
+    <Content Include="Content\Images\TrofejOsnovni.png" />
     <Content Include="Content\IndexStyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -392,6 +412,11 @@
     <Content Include="Views\Quizs\UploadImage.cshtml" />
     <Content Include="Views\Manage\UploadImage.cshtml" />
     <Content Include="Views\Quizs\CompletedQuizzes.cshtml" />
+    <Content Include="Views\AchievementsCategories\Create.cshtml" />
+    <Content Include="Views\AchievementsCategories\Delete.cshtml" />
+    <Content Include="Views\AchievementsCategories\Details.cshtml" />
+    <Content Include="Views\AchievementsCategories\Edit.cshtml" />
+    <Content Include="Views\AchievementsCategories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -476,6 +501,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709061628445_admin.resx">
       <DependentUpon>201709061628445_admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709101135126_achievementCategory.resx">
+      <DependentUpon>201709101135126_achievementCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709101159565_achCategory.resx">
+      <DependentUpon>201709101159565_achCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709101232567_achCategoryId.resx">
+      <DependentUpon>201709101232567_achCategoryId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709121820026_achImage.resx">
+      <DependentUpon>201709121820026_achImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

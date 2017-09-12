@@ -54,22 +54,32 @@
 <table class="table">
     <tr>
         <th>
+
+        </th>
+        <th>
             <h4>Naziv trofeja</h4>
         </th>
         <th>
             <h4>Opis</h4>
         </th>
+        <th><h4>Tip Trofeja</h4></th>
     </tr>
 
     @foreach (var item in Model.Achievement)
     {
 
-        <tr>
+        <tr style="font-weight:bold">
+            <td style="max-height:40px;max-width:40px">
+                <img src="~/Content/Images/@item.AchievementCategory.ImageUrl" style="display:block;height:100%; max-height:40px" class="img-responsive img-rounded" />
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AchievementCategory.Name)
             </td>
 
         </tr>

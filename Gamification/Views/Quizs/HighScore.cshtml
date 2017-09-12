@@ -21,10 +21,11 @@
                 <h4 style="font-weight:bold">Level </h4>
             </th>
             <th>
-                <h4 style="font-weight:bold">XP</h4>
+                <a style="color:black" href="/Quizs/HighScore?orderBy=1"><h4 style="font-weight:bold">XP</h4></a>
             </th>
             <th>
-                <h4 style="font-weight:bold">Broj trofeja</h4>
+                <a style="color:black" href="/Quizs/HighScore?orderBy=2"><h4 style="font-weight:bold">Broj trofeja</h4></a>
+                @*@Html.ActionLink("Broj Trofeja", "HighScore", "Quizs", new { orderBy=2},new { class="btn-default"})*@
             </th>
             <th>
 

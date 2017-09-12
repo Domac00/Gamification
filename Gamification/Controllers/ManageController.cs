@@ -72,10 +72,13 @@ namespace Gamification.Controllers
 
            
 
-            if (ViewBag.UserLevel == 1) { ViewBag.NextLevel = 30;   }
-            else if (ViewBag.UserLevel == 2) { ViewBag.NextLevel = 50; }
-            else if (ViewBag.UserLevel == 3) { ViewBag.NextLevel = 100; }
+            if (ViewBag.UserLevel == 1) { ViewBag.NextLevel = 50;   }
+            else if (ViewBag.UserLevel == 2) { ViewBag.NextLevel = 100; }
+            else if (ViewBag.UserLevel == 3) { ViewBag.NextLevel = 150; }
             else if (ViewBag.UserLevel == 4) { ViewBag.NextLevel = 200; }
+            else if (ViewBag.UserLevel == 5) { ViewBag.NextLevel = 250; }
+            else if (ViewBag.UserLevel == 6) { ViewBag.NextLevel = 300; }
+            else if (ViewBag.UserLevel == 7) { ViewBag.NextLevel = 350; }
 
             var width = (decimal)ViewBag.xp / (decimal)ViewBag.NextLevel;
             width *= 100;
@@ -105,6 +108,8 @@ namespace Gamification.Controllers
                 ImageUrl = db.UserQuizData.FirstOrDefault(u => u.UserId == userId).ImageUrl,
                 UserName = db.UserQuizData.FirstOrDefault(u => u.UserId == userId).UserName,
                 isAdmin = db.UserQuizData.FirstOrDefault(u => u.UserId == userId).isAdmin
+                
+                
 
 
             };

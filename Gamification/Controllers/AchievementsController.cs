@@ -41,8 +41,9 @@ namespace Gamification.Controllers
         }
 
         // GET: Achievements/Create
-        public ActionResult Create()
-        {
+        public ActionResult Create() { 
+            ViewBag.AchievementCategoryId = new SelectList(db.AchievementCategory, "Id", "Name");
+        
             return View();
         }
 
@@ -55,11 +56,13 @@ namespace Gamification.Controllers
         {
             if (ModelState.IsValid)
             {
+               
                 db.Achievement.Add(achievement);
                 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
 
             return View(achievement);
         }

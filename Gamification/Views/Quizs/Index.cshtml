@@ -28,16 +28,22 @@
 
 <br/>
 
-@{
-    int Level = ViewBag.Level;
-    
+@{ 
+    int Level = 1;
 }
 
 @{ 
 
     foreach (var category in Model)
     {
+
         
+            
+            if (category.Id == 1) { Level = ViewBag.LevelHTML; }
+            if (category.Id == 2) { Level = ViewBag.LevelJS; }
+            if(category.Id == 3) { Level = ViewBag.LevelServer; }
+        
+
         <div class="flip">
             <h4 style="font-weight:bold"> @Html.DisplayFor(cName => category.Name)</h4>
         </div>

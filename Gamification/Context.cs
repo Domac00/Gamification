@@ -22,6 +22,7 @@ namespace Gamification
         public DbSet<Achievement> Achievement { get; set; }
         public DbSet<Tutorial> Tutorial { get; set; }
         public DbSet<QuizCategory> QuizCategory { get; set; }
+        public DbSet<AchievementCategory> AchievementCategory { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

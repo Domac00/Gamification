@@ -26,24 +26,71 @@ namespace Gamification.Controllers
             ViewBag.xp = xp;
             ViewBag.UserId = User.Identity.GetUserId();
 
+            //ukupni kvizovi riješeni od korisnika
             int LevelOneUser = db.UserQuizData.Find(User.Identity.GetUserId()).Quiz.Where(q => q.QuizLevel == 1).Count();
             int LevelTwoUser = db.UserQuizData.Find(User.Identity.GetUserId()).Quiz.Where(q => q.QuizLevel == 2).Count();
             int LevelThreeUser = db.UserQuizData.Find(User.Identity.GetUserId()).Quiz.Where(q => q.QuizLevel == 3).Count();
 
-            int levelOne =db.Quizes.Where(q => q.QuizLevel == 1).Count();
-            int levelTwo = db.Quizes.Where(q => q.QuizLevel == 2).Count();
-            int levelThree = db.Quizes.Where(q => q.QuizLevel == 3).Count();
-            ViewBag.Level = 1;
+            //riješeni kvizovi po kategorijama
+            int LevelOneUserHTML = db.UserQuizData.Find(User.Identity.GetUserId()).Quiz.Where(q => q.QuizCategoryId == 1).Where(q => q.QuizLevel == 1).Count();
+            int LevelOneUserJS = db.UserQuizData.Find(User.Identity.GetUserId()).Quiz.Where(q => q.QuizCategoryId == 2).Where(q => q.QuizLevel == 1).Count();
+            int LevelOneUserServer = db.UserQuizData.Find(User.Identity.GetUserId()).Quiz.Where(q => q.QuizCategoryId == 3).Where(q => q.QuizLevel == 1).Count();
 
-            if (LevelOneUser == levelOne)
+
+            int LevelTwoUserHTML = db.UserQuizData.Find(User.Identity.GetUserId()).Quiz.Where(q => q.QuizCategoryId == 1).Where(q => q.QuizLevel == 1).Count();
+            int LevelTwoUserJS = db.UserQuizData.Find(User.Identity.GetUserId()).Quiz.Where(q => q.QuizCategoryId == 2).Where(q => q.QuizLevel == 1).Count();
+            int LevelTwoUserServer = db.UserQuizData.Find(User.Identity.GetUserId()).Quiz.Where(q => q.QuizCategoryId == 3).Where(q => q.QuizLevel == 1).Count();
+
+
+            int LevelThreeUserHTML = db.UserQuizData.Find(User.Identity.GetUserId()).Quiz.Where(q => q.QuizCategoryId == 1).Where(q => q.QuizLevel == 1).Count();
+            int LevelThreeUserJS = db.UserQuizData.Find(User.Identity.GetUserId()).Quiz.Where(q => q.QuizCategoryId == 2).Where(q => q.QuizLevel == 1).Count();
+            int LevelThreeUserServer = db.UserQuizData.Find(User.Identity.GetUserId()).Quiz.Where(q => q.QuizCategoryId == 3).Where(q => q.QuizLevel == 1).Count();
+
+
+            //ukupan broj kvizova po kategorijama i levelima
+            int levelOneHTML = db.Quizes.Where(q => q.QuizLevel == 1).Where(q => q.QuizCategoryId == 1).Count();
+            int levelTwoHTML = db.Quizes.Where(q => q.QuizLevel == 2).Where(q => q.QuizCategoryId == 1).Count();
+            int levelThreeHTML = db.Quizes.Where(q => q.QuizLevel == 3).Where(q => q.QuizCategoryId == 1).Count();
+
+            int levelOneJS = db.Quizes.Where(q => q.QuizLevel == 1).Where(q => q.QuizCategoryId == 2).Count();
+            int levelTwoJS = db.Quizes.Where(q => q.QuizLevel == 2).Where(q => q.QuizCategoryId == 2).Count();
+            int levelThreeJS = db.Quizes.Where(q => q.QuizLevel == 3).Where(q => q.QuizCategoryId == 2).Count();
+
+            int levelOneServer = db.Quizes.Where(q => q.QuizLevel == 1).Where(q => q.QuizCategoryId == 3).Count();
+            int levelTwoSeerver = db.Quizes.Where(q => q.QuizLevel == 2).Where(q => q.QuizCategoryId == 3).Count();
+            int levelThreeServer = db.Quizes.Where(q => q.QuizLevel == 3).Where(q => q.QuizCategoryId == 3).Count();
+
+
+            ViewBag.LevelHTML = 1;
+            ViewBag.LevelJS = 1;
+            ViewBag.LevelServer = 1;
+
+            if (LevelOneUserHTML == levelOneHTML)
             {
-                ViewBag.Level = 2;
+                ViewBag.LevelHTML = 2;
             }
-            if (LevelTwoUser == levelTwo)
+            if (LevelTwoUserHTML == levelTwoHTML)
             {
-                ViewBag.Level = 3;
+                ViewBag.LevelHTML = 3;
             }
-          
+            if (LevelOneUserJS == levelOneJS)
+            {
+                ViewBag.LevelJS = 2;
+            }
+            if (LevelTwoUserJS == levelTwoJS)
+            {
+                ViewBag.LevelJS = 3;
+            }
+            if (LevelOneUserServer == levelOneServer)
+            {
+                ViewBag.LevelServer = 2;
+            }
+            if (LevelTwoUserServer == levelTwoSeerver)
+            {
+                ViewBag.LevelServer = 3;
+            }
+
+
 
 
             return View(db.QuizCategory.ToList());
@@ -277,6 +324,7 @@ namespace Gamification.Controllers
 
             if (addScore) {
                 uqd.Accuracy = (uqd.Accuracy + us.Percentage) / uqd.NumberOfSolvedQuizes;
+                uqd.Accuracy = (float)Math.Round(uqd.Accuracy, 2);
 
                 //označavanje kviza kao riješenog
                 db.UserQuizData.Include("Quiz").FirstOrDefault(u => u.UserId == UserId).Quiz.Add(db.Quizes.Find(us.QuizId));
@@ -343,11 +391,20 @@ namespace Gamification.Controllers
         }
 
         // high score
-        public ActionResult HighScore()
+        public ActionResult HighScore(int orderBy)
         {
             ViewBag.UserId = User.Identity.GetUserId();
+
+            if(orderBy == 2)
+            {
+                return View(db.UserQuizData.OrderByDescending(o => o.NumberOfAchievements).ToList());
+            }
+            else
+            {
+
+                return View(db.UserQuizData.OrderByDescending(o => o.xp).ToList());
+            }
            
-            return View(db.UserQuizData.OrderByDescending(o => o.xp).ToList());
         }
 
         //Prikaz profla određenog korisnika
@@ -404,11 +461,16 @@ namespace Gamification.Controllers
             {
                 return 12;
             }
-            //Riješeni svi level 3 kvizovi
-            else if (uqd.Quiz.Where(q => q.QuizLevel == 3).Count() == LevelThreeQuiz && !uqd.Achievement.Any(a => a.Id == 13))
+            //level 3 100%
+            else if (us.QuizLevel == 3 && us.Percentage == 100 && !uqd.Achievement.Any(a => a.Id == 13))
             {
                 return 13;
             }
+            //Riješeni svi level 3 kvizovi
+            //else if (uqd.Quiz.Where(q => q.QuizLevel == 3).Count() == LevelThreeQuiz && !uqd.Achievement.Any(a => a.Id == 13))
+            //{
+            //    return 13;
+            //}
             else return 0;
         }
 

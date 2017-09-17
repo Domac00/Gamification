@@ -176,7 +176,9 @@ namespace Gamification.Controllers
                     uqd.UserId = user.Id;
                     uqd.UserLevel = 1;
                     uqd.Accuracy = 0;
-                    uqd.ImageUrl = "profile-default.png";                     uqd.UserName = userName;
+                    uqd.ImageUrl = "profile-default.png";
+                    uqd.Title = "Početnik";
+                     uqd.UserName = userName;
                     db.UserQuizData.Add(uqd);
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");

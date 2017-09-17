@@ -54,6 +54,11 @@ if (ViewBag.message != null)
 {
     <h4 style="text-align:center">Osvojen trofej: <span style="color:green"> @ViewBag.message</span></h4>
     }
+    if (ViewBag.LevelMsg != null)
+    {
+        <br />
+        <h4 style="text-align:center;font-weight:bold">@ViewBag.LevelMsg !</h4>
+    }
 }
 else
 {

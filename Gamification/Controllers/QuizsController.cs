@@ -316,6 +316,7 @@ namespace Gamification.Controllers
             var UserId = User.Identity.GetUserId();
             var xpToShow = us.score * us.QuizLevel;
             var NumberOfQuestions = db.Quizes.Find(us.QuizId).Questions.Count;
+            var UserLevelOld = uqd.UserLevel;
            
             //postotak rezultata i prosjecni postotak korisnika
             ViewBag.NumberOfQuestions = NumberOfQuestions;
@@ -328,9 +329,11 @@ namespace Gamification.Controllers
 
                 //označavanje kviza kao riješenog
                 db.UserQuizData.Include("Quiz").FirstOrDefault(u => u.UserId == UserId).Quiz.Add(db.Quizes.Find(us.QuizId));
+                //provjera titule
+                uqd.Title = CheckTitle(uqd);
                 db.UserQuizData.AddOrUpdate(uqd);
                 db.SaveChanges();
-
+                
 
                 //Provjera achievementa
                 var aId = CheckAchievement(uqd, us);        //id ostvarenog trofeja
@@ -349,14 +352,24 @@ namespace Gamification.Controllers
                     var AchievementMsg = db.Achievement.Find(aId).Description.ToString();
                     ViewBag.message = AchievementName + " - " + AchievementMsg;
 
+
+                    uqd.UserLevel = uqd.checkUserLevel(uqd.xp);
                     db.UserQuizData.AddOrUpdate(uqd);
                     db.SaveChanges();
 
                     aId = CheckAchievement(uqd, us);
                 }
 
+                
+
+                //poruka ako se korisnku poveca level
+                if (UserLevelOld != uqd.UserLevel)
+                {
+                    UserScore.msg = "Level " + uqd.UserLevel;
+                }
+
                 //poruka za level
-                ViewBag.LevelMsg = us.msg;
+                ViewBag.LevelMsg = UserScore.msg;
                 
 
             }
@@ -411,6 +424,41 @@ namespace Gamification.Controllers
         public ActionResult ShowProfile(string id)
         {
             var profile = db.UserQuizData.Find(id);
+
+            ViewBag.NumberOfAchievements = db.Achievement.Count();
+            ViewBag.NumberOfHTML = db.UserQuizData.Find(id).Quiz.Where(q => q.QuizCategoryId == 1).Count();
+            ViewBag.NumberOfJS = db.UserQuizData.Find(id).Quiz.Where(q => q.QuizCategoryId == 2).Count();
+            ViewBag.NumberOfServer = db.UserQuizData.Find(id).Quiz.Where(q => q.QuizCategoryId == 3).Count();
+
+            if (profile.UserLevel == 1) { ViewBag.NextLevel = 10; }
+            else if (profile.UserLevel == 2) { ViewBag.NextLevel = 30; }
+            else if (profile.UserLevel == 3) { ViewBag.NextLevel = 50; }
+            else if (profile.UserLevel == 4) { ViewBag.NextLevel = 90; }
+            else if (profile.UserLevel == 5) { ViewBag.NextLevel = 130; }
+            else if (profile.UserLevel == 6) { ViewBag.NextLevel = 180; }
+            else if (profile.UserLevel == 7) { ViewBag.NextLevel = 250; }
+            else if (profile.UserLevel == 8) { ViewBag.NextLevel = 320; }
+            else if (profile.UserLevel == 9) { ViewBag.NextLevel = 400; }
+            else if (profile.UserLevel == 10) { ViewBag.NextLevel = 500; }
+
+
+            // za progresbar xp
+            var width = (decimal)profile.xp / (decimal)ViewBag.NextLevel;
+            width *= 100;
+            width = Math.Round((decimal)width, 0);
+            width.ToString();
+            string style = "width:" + width + "%";
+            ViewBag.style = style;
+
+            //progresbar trofeji
+            var widthAch = (decimal)profile.Achievement.Count / (decimal)ViewBag.NumberOfAchievements;
+            widthAch *= 100;
+            widthAch = Math.Round((decimal)widthAch, 0);
+            widthAch.ToString();
+            string styleAch = "width:" + widthAch + "%";
+            ViewBag.styleAch = styleAch;
+
+
             return View(profile);
         }
 
@@ -461,17 +509,96 @@ namespace Gamification.Controllers
             {
                 return 12;
             }
-            //level 3 100%
-            else if (us.QuizLevel == 3 && us.Percentage == 100 && !uqd.Achievement.Any(a => a.Id == 13))
+            //level 3 100% -napredni
+            else if (us.QuizLevel == 3 && us.Percentage == 100 && !uqd.Achievement.Any(a => a.Id == 1014))
             {
-                return 13;
+                return 1014;
             }
-            //Riješeni svi level 3 kvizovi
-            //else if (uqd.Quiz.Where(q => q.QuizLevel == 3).Count() == LevelThreeQuiz && !uqd.Achievement.Any(a => a.Id == 13))
-            //{
-            //    return 13;
-            //}
+            //Riješeni svi level 3 kvizovi - napredni
+            else if (uqd.Quiz.Where(q => q.QuizLevel == 3).Count() == LevelThreeQuiz && !uqd.Achievement.Any(a => a.Id == 1015))
+            {
+                return 1015;
+            }
+            //Level 1 100% - osnovni
+            else if (us.QuizLevel==1 && us.Percentage==100 && !uqd.Achievement.Any(a => a.Id == 1016))
+            {
+                return 1016;
+            }
+            //Prosječna uspješnost nakon 5 kvizova 100% - napredni
+            else if (uqd.NumberOfSolvedQuizes==5 && uqd.Accuracy==100 && !uqd.Achievement.Any(a => a.Id == 1017))
+            {
+                return 1017;
+            }
+            //Prosječna uspješnost nakon 5 kvizova veća od 60% - osnovni
+            else if (uqd.NumberOfSolvedQuizes == 5 && uqd.Accuracy > 60 && !uqd.Achievement.Any(a => a.Id == 1018))
+            {
+                return 1018;
+            }
+            //Prosječna uspješnost nakon 10 kvizova veća od 60% - napredni
+            else if (uqd.NumberOfSolvedQuizes == 10 && uqd.Accuracy > 60 && !uqd.Achievement.Any(a => a.Id == 1019))
+            {
+                return 1019;
+            }
+
             else return 0;
+        }
+
+
+        //provjera titule
+        private string CheckTitle(UserQuizData uqd)
+        {
+            
+            var numberOfHTML = db.Quizes.Where(q => q.QuizCategoryId == 1).Count();
+            var numberOfJS = db.Quizes.Where(q => q.QuizCategoryId == 1).Count();
+            var numberOfServer = db.Quizes.Where(q => q.QuizCategoryId == 1).Count();
+            var numberOfQuizes = db.Quizes.Count();
+            var numberOfHTML_level1 = db.Quizes.Where(q => q.QuizCategoryId == 1).Where(q => q.QuizLevel == 1).Count();
+            var numberOfHTML_level2 = db.Quizes.Where(q => q.QuizCategoryId == 1).Where(q => q.QuizLevel == 2).Count();
+            var numberOfJS_level1 = db.Quizes.Where(q => q.QuizCategoryId == 2).Where(q => q.QuizLevel == 1).Count();
+            var numberOfJS_level2 = db.Quizes.Where(q => q.QuizCategoryId == 2).Where(q => q.QuizLevel == 2).Count();
+            var numberOfServer_level1 = db.Quizes.Where(q => q.QuizCategoryId == 3).Where(q => q.QuizLevel == 1).Count();
+            var numberOfServer_level2 = db.Quizes.Where(q => q.QuizCategoryId == 3).Where(q => q.QuizLevel == 2).Count();
+
+
+            if (uqd.Quiz.Count == numberOfQuizes)
+            {
+                
+                return "Web Stručnjak";
+            }
+            else if(uqd.Quiz.Where(q=>q.QuizCategoryId==1).Count() == numberOfHTML)
+            {
+                return "HTML Stručnjak";
+            }
+           else if (uqd.Quiz.Where(q => q.QuizCategoryId == 2).Count() == numberOfJS)
+            {
+                return "JavaScript Stručnjak";
+            }
+           else if (uqd.Quiz.Where(q => q.QuizCategoryId == 3).Count() == numberOfServer)
+            {
+                return "Server Side Stručnjak";
+            }
+            if(uqd.Quiz.Where(q=>q.QuizCategoryId==1).Where(q=>q.QuizLevel==1).Count() == numberOfHTML_level1)
+            {
+                return "HTML Znalac";
+            }
+            if (uqd.Quiz.Where(q => q.QuizCategoryId == 2).Where(q => q.QuizLevel == 1).Count() == numberOfJS_level1)
+            {
+                return "JavaScript Znalac";
+            }
+            if (uqd.Quiz.Where(q => q.QuizCategoryId == 3).Where(q => q.QuizLevel == 1).Count() == numberOfServer_level1)
+            {
+                return "ServerSide Znalac";
+            }
+            else  if(uqd.xp > 100)
+            {
+                return "Web znalac";
+            }
+          else  if(uqd.xp > 30)
+            {
+                return "Web Početnik";
+            }else { return "Početnik"; }
+
+            
         }
 
 

@@ -293,6 +293,10 @@
     <Compile Include="Migrations\201709121820026_achImage.Designer.cs">
       <DependentUpon>201709121820026_achImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709131415591_userTitle.cs" />
+    <Compile Include="Migrations\201709131415591_userTitle.Designer.cs">
+      <DependentUpon>201709131415591_userTitle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Achievement.cs" />
@@ -513,6 +517,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709121820026_achImage.resx">
       <DependentUpon>201709121820026_achImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709131415591_userTitle.resx">
+      <DependentUpon>201709131415591_userTitle.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

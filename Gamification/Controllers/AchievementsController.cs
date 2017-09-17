@@ -22,7 +22,7 @@ namespace Gamification.Controllers
           
            ViewBag. UserId = User.Identity.GetUserId();
 
-            return View(db.Achievement.ToList());
+            return View(db.AchievementCategory.ToList());
         }
 
         // GET: Achievements/Details/5
@@ -52,7 +52,7 @@ namespace Gamification.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,UserId")] Achievement achievement)
+        public ActionResult Create(Achievement achievement)
         {
             if (ModelState.IsValid)
             {

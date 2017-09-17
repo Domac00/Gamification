@@ -64,28 +64,44 @@ namespace Gamification.Controllers
             ViewBag.NumberOfTutorials = db.UserQuizData.Include("Quiz").FirstOrDefault(u => u.UserId == UserId).Tutorial.Count;
             ViewBag.xp = xp;
             ViewBag.NumberOfSolvedQuizes = user.NumberOfSolvedQuizes;
-            ViewBag.NumberOfAchievements = user.NumberOfAchievements;
+            ViewBag.NumberOfAchievements = db.Achievement.Count();
             ViewBag.UserId = User.Identity.GetUserId();
             ViewBag.UserLevel = user.checkUserLevel(xp);
             ViewBag.Accuracy = user.Accuracy;
+            ViewBag.NumberOfHTML = db.UserQuizData.Find(User.Identity.GetUserId()).Quiz.Where(q => q.QuizCategoryId == 1).Count();
+            ViewBag.NumberOfJS = db.UserQuizData.Find(User.Identity.GetUserId()).Quiz.Where(q => q.QuizCategoryId == 2).Count();
+            ViewBag.NumberOfServer = db.UserQuizData.Find(User.Identity.GetUserId()).Quiz.Where(q => q.QuizCategoryId == 3).Count();
+            ViewBag.NumberOfAchievementsUser = db.UserQuizData.Find(User.Identity.GetUserId()).Achievement.Count();
             ViewBag.edit = false;
 
            
 
-            if (ViewBag.UserLevel == 1) { ViewBag.NextLevel = 50;   }
-            else if (ViewBag.UserLevel == 2) { ViewBag.NextLevel = 100; }
-            else if (ViewBag.UserLevel == 3) { ViewBag.NextLevel = 150; }
-            else if (ViewBag.UserLevel == 4) { ViewBag.NextLevel = 200; }
-            else if (ViewBag.UserLevel == 5) { ViewBag.NextLevel = 250; }
-            else if (ViewBag.UserLevel == 6) { ViewBag.NextLevel = 300; }
-            else if (ViewBag.UserLevel == 7) { ViewBag.NextLevel = 350; }
+            if (ViewBag.UserLevel == 1) { ViewBag.NextLevel = 10;   }
+            else if (ViewBag.UserLevel == 2) { ViewBag.NextLevel = 30; }
+            else if (ViewBag.UserLevel == 3) { ViewBag.NextLevel = 50; }
+            else if (ViewBag.UserLevel == 4) { ViewBag.NextLevel = 90; }
+            else if (ViewBag.UserLevel == 5) { ViewBag.NextLevel = 130; }
+            else if (ViewBag.UserLevel == 6) { ViewBag.NextLevel = 180; }
+            else if (ViewBag.UserLevel == 7) { ViewBag.NextLevel = 250; }
+            else if (ViewBag.UserLevel == 8) { ViewBag.NextLevel = 320; }
+            else if (ViewBag.UserLevel == 9) { ViewBag.NextLevel = 400; }
+            else if (ViewBag.UserLevel == 10) { ViewBag.NextLevel = 500; }
 
+            // za progresbar xp
             var width = (decimal)ViewBag.xp / (decimal)ViewBag.NextLevel;
             width *= 100;
             width =Math.Round((decimal)width,0);
             width.ToString();
             string style = "width:" + width + "%";
             ViewBag.style = style;
+
+            //progresbar trofeji
+            var widthAch = (decimal)ViewBag.NumberOfAchievementsUser / (decimal)ViewBag.NumberOfAchievements;
+            widthAch *= 100;
+            widthAch = Math.Round((decimal)widthAch, 0);
+            widthAch.ToString();
+            string styleAch = "width:" + widthAch + "%";
+            ViewBag.styleAch = styleAch;
 
             //ViewBag.StatusMessage =
             //    message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
@@ -107,7 +123,8 @@ namespace Gamification.Controllers
                 Achievements = db.UserQuizData.FirstOrDefault(u => u.UserId == userId).Achievement.ToList(),
                 ImageUrl = db.UserQuizData.FirstOrDefault(u => u.UserId == userId).ImageUrl,
                 UserName = db.UserQuizData.FirstOrDefault(u => u.UserId == userId).UserName,
-                isAdmin = db.UserQuizData.FirstOrDefault(u => u.UserId == userId).isAdmin
+                isAdmin = db.UserQuizData.FirstOrDefault(u => u.UserId == userId).isAdmin,
+                Title = db.UserQuizData.FirstOrDefault(u => u.UserId == userId).Title,
                 
                 
 

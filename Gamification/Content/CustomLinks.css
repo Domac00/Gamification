@@ -40,3 +40,12 @@ a:link{
 ul {
   list-style: none;
 }
+
+
+.title{
+    border:hidden;
+    border-radius:5px;
+    background-color: #89dc8d;
+    display:inline-block;
+    padding:5px;
+}

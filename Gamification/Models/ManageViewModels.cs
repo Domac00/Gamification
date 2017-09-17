@@ -16,6 +16,7 @@ namespace Gamification.Models
         public IList<AchievementCategory> AchievementCategory { get; set; }
         public string ImageUrl { get; set; }
         public string UserName { get; set; }
+        public string Title { get; set; }
         public bool isAdmin { get; set; }
     }
 

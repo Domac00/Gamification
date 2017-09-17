@@ -140,7 +140,7 @@ namespace Gamification.Controllers
             var tut = db.Tutorial.Find(id);
             var UserId = User.Identity.GetUserId();
             tut.isCompleted = true;
-            user.xp += 10;
+            user.xp += 3;
             user.UserLevel = user.checkUserLevel(user.xp);
             user.NumberOfCompletedTutorials++;
 

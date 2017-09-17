@@ -96,3 +96,4 @@ C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\o
 C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.achCategory.resources
 C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.achCategoryId.resources
 C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.achImage.resources
+C:\Users\domin\documents\visual studio 2015\Projects\Gamification\Gamification\obj\Debug\Gamification.Migrations.userTitle.resources

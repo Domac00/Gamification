@@ -23,7 +23,11 @@
         <img src="~/Content/Images/@Model.ImageUrl" style="width:150px;height:150px" class="img-responsive img-rounded" /> 
     </div>
     <a style="color:grey" href="Manage/UploadImage">Promijeni sliku profila</a>
-    <h2>@Model.UserName</h2>
+    <h2 style="font-weight:bold">@Model.UserName</h2>
+    <div style="width:auto">
+        <p class="title">@Model.Title</p>
+    </div>
+    
     <div class="flip" style="text-align:left;color:grey">
         <a style="color:grey">Promijeni ime</a>
     </div>
@@ -42,7 +46,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt><h4>Level:</h4></dt>
-        <dd>
+        <dd >
             <h4> @ViewBag.UserLevel </h4>
         </dd>
         <dt><h4>XP:</h4></dt>
@@ -54,17 +58,25 @@
                 </div>
             </div>
         </dd>
-        <dt><h4>Broj riješenih kvizova:</h4></dt>
+        
+            <dt><h4>Broj riješenih kvizova:</h4>
+        
+        </dt>
+        
         <dd>
             
-            <h4> @ViewBag.NumberOfSolvedQuizes</h4>
+            <h4> @ViewBag.NumberOfSolvedQuizes    <span style="display:inline-block; padding-left:100px">HTML&CSS: @ViewBag.NumberOfHTML </span>  <span style="display:inline-block; padding-left:100px">JavaScript: @ViewBag.NumberOfJS </span> <span style="display:inline-block; padding-left:100px">ServerSide: @ViewBag.NumberOfServer </span></h4>
            
             
         </dd>
         <dt><h4>Broj osvojenih trofeja:</h4></dt>
         <dd>
-
-            <h4> @ViewBag.NumberOfAchievements</h4>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="70"
+                     aria-valuemin="0" aria-valuemax="100" style="@ViewBag.styleAch">
+                    @ViewBag.NumberOfAchievementsUser / @ViewBag.NumberOfAchievements
+                </div>
+            </div>
 
 
         </dd>
